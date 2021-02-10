@@ -9,6 +9,7 @@ I. Style Guide(s)
 - Pycodestyle 
 
 React frontend:
+---
 I. Plugins
  - ESLint
  - Prettier

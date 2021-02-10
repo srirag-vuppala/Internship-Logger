@@ -2,14 +2,16 @@
 CSC 307 Project 
 
 Code Style:
-Python backend: 
+---
+Python backend:
+---
 I. Style Guide(s)
-  A. Pycodestyle 
+- Pycodestyle 
 
 React frontend:
 I. Plugins
-  A. ESLint
-  B. Prettier
+ - ESLint
+ - Prettier
 
 Curly Braces: on same line (K&R Style (OTBS) )
 Function/ method naming: snake_case()

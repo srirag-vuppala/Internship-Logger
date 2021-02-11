@@ -13,7 +13,12 @@ React frontend:
 I. Plugins
  - ESLint
  - Prettier
-
-Curly Braces: on same line (K&R Style (OTBS) )
-Function/ method naming: snake_case()
-imports: Absolute Imports (ex: import java.util.ArrayList)
+---
+Curly Braces: 
+- on same line (K&R Style (OTBS) )
+<!-- end of the list -->
+Function/ method naming:
+- snake_case()
+<!-- end of the list -->
+imports:
+- Absolute Imports (ex: import java.util.ArrayList)

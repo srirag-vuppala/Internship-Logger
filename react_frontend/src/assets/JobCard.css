@@ -1,0 +1,37 @@
+  
+  
+  
+  .job-card{
+    position: relative;
+    list-style: none;
+    font-family: 'Arial';
+    font-weight: 200; 
+    padding: 20px;
+    border-style:solid;
+    border-width: 1mm;
+    width:50%;
+    left:25%;
+    bottom:25%;
+  }
+
+  .Company{
+      border-style: outset;
+      border-width: 1mm;
+  }
+
+  .Position{
+    border-style: outset;
+    border-width: 1mm;
+}
+
+.JobLink{
+    border-style: outset;
+    border-width: 1mm;
+}
+
+.Info{
+    border-style: outset;
+    border-width: 1mm;
+}
+
+  

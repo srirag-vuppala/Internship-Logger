@@ -80,7 +80,7 @@ class App extends Component {
         <Table characterData={characters} removeCharacter={this.removeCharacter} />
         <Form handleSubmit={this.handleSubmit}/>
         {/*<SearchBar searchBoxName={"userNameSearch"} onSearchTermChange={this.onSearch} />*/}
-        <input type="text" placeholder="Search..." />
+        <input type="text" style={{textAlign: 'center'}} placeholder="Search..." />
       </div>
     )
   }

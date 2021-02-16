@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import Table from './Table'
 import Form from './Form'
 import axios from 'axios'
+import SearchBar from './SearchBar'
+
 
 class App extends Component {
   state = {
     characters: [],
   }
+
   removeCharacter = index => {
     const { characters } = this.state
 
@@ -76,6 +79,7 @@ class App extends Component {
       <div className="container">
         <Table characterData={characters} removeCharacter={this.removeCharacter} />
         <Form handleSubmit={this.handleSubmit}/>
+        <SearchBar searchBoxName={"userNameSearch"} onSearchTermChange={this.onSearch} />
       </div>
     )
   }

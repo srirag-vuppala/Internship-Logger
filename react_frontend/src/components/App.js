@@ -79,7 +79,8 @@ class App extends Component {
       <div className="container">
         <Table characterData={characters} removeCharacter={this.removeCharacter} />
         <Form handleSubmit={this.handleSubmit}/>
-        <SearchBar searchBoxName={"userNameSearch"} onSearchTermChange={this.onSearch} />
+        {/*<SearchBar searchBoxName={"userNameSearch"} onSearchTermChange={this.onSearch} />*/}
+        <input type="text" placeholder="Search..." />
       </div>
     )
   }

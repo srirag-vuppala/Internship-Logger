@@ -10,14 +10,14 @@ import Popper from 'popper.js';
 function Dropdown_Button() {
     return (
         <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Dropdown Button
+        <Dropdown.Toggle style = {{background : '#C4C4C4'}} variant="success" id="dropdown-basic">
+        Filter
         </Dropdown.Toggle>
 
         <link rel="stylesheet" type="text/css" href="Dropdown_Button.css"></link>
         
         <Dropdown.Menu>
-        <Dropdown.Item href="/">Waiting to Hear Back</Dropdown.Item>
+        <Dropdown.Item href="/"> Waiting to Hear Back</Dropdown.Item>
         <Dropdown.Item href="/">Coding Challenge</Dropdown.Item>
         <Dropdown.Item href="/">Pre-recorded Interview</Dropdown.Item>
         <Dropdown.Item href="/">In-person Interview</Dropdown.Item>

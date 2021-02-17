@@ -1,36 +1,25 @@
 import React, { Component } from 'react'
-import Table from './Table'
-import Form from './Form'
-import axios from 'axios'
 import NavBar from './NavBar'
 import Spreadsheet from './Spreadsheet'
+import Home from './Home'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'; 
-
-function homepage() {
-  return (
-    <div>
-      <p>hihii</p>
-    </div>
-  )
-}
 
 class App extends Component {
   render() {
     return (
-      <>
       <Router>
         <div className="App">
           <NavBar />
           <Switch>
             <Route exact path="/Spreadsheet" component={Spreadsheet}/> 
-            <Route exact path="/" component={homepage}/> 
+            <Route exact path="/" component={Home}/> 
           </Switch>
         </div>
       </Router>
-      </>
     )
   }
 }
+
 //   state = {
 //     characters: [],
 //   }

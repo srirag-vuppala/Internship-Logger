@@ -1,6 +1,10 @@
 # Internship-Logger
 CSC 307 Project 
 
+Travis Dashboard
+---
+https://travis-ci.com/github/srirag-vuppala/Internship-Logger
+
 Time Log Link:
 ---
 https://docs.google.com/spreadsheets/d/1lA9IDxMlvwn2KnbLBLqlZPUooWh7hr3ekhfCKxlAwmg/edit?usp=sharing

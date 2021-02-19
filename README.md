@@ -1,5 +1,5 @@
+[![Build Status]( https://travis-ci.com/github/srirag-vuppala/Internship-Logger)](https://travis-ci.com/srirag-vuppala/Internship-Logger.svg?branch=main)
 # Internship-Logger
-[![Build Status]( https://travis-ci.com/github/srirag-vuppala/Internship-Logger ](https://travis-ci.com/github/srirag-vuppala/Internship-Logger.png)
 CSC 307 Project 
 
 Travis Dashboard

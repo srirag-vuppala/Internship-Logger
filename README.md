@@ -1,4 +1,4 @@
-[![Build Status]( https://travis-ci.com/github/srirag-vuppala/Internship-Logger)](https://travis-ci.com/srirag-vuppala/Internship-Logger.svg?branch=main)
+[![Build Status](https://travis-ci.com/srirag-vuppala/Internship-Logger.svg?branch=main)](https://travis-ci.com/srirag-vuppala/Internship-Logger)
 # Internship-Logger
 CSC 307 Project 
 

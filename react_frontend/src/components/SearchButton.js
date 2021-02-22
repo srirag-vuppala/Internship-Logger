@@ -1,4 +1,5 @@
 import '../assets/SearchButton.css'
+import SearchBar from './SearchBar'
 
 function SearchButton() {
     return (
@@ -10,3 +11,5 @@ function SearchButton() {
         </div>
     )
 }
+
+export default SearchButton

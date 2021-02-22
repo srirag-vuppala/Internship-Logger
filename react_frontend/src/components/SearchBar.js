@@ -1,3 +1,4 @@
+import '../assets/SearchBar.css'
 /* import React, { Component } from 'react'
 
 function SearchBar() {
@@ -61,8 +62,8 @@ import React from 'react';
 
 function SearchBar() {
   return (
-    <div className="SearchBar">
-        <input
+    <div className="search-bar">
+        <input className="input-text"
         type="text"
         placeholder="Search Bar"
         />
@@ -70,4 +71,4 @@ function SearchBar() {
   )
 }
 
-export default SearchBar;
+export default SearchBar

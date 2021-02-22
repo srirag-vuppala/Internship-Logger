@@ -7,7 +7,7 @@ import SearchButton from './SearchButton'
 
 
 class App extends Component {
-  state = {
+/*   state = {
     characters: [],
   }
 
@@ -72,7 +72,7 @@ class App extends Component {
         this.setState({ characters: [...this.state.characters, callResult.data] });
       }
     });
-  }
+  } */
 
   render() {
     const { characters } = this.state

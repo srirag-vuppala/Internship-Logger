@@ -22,3 +22,7 @@ Function/ method naming:
 <!-- end of the list -->
 imports:
 - Absolute Imports (ex: import java.util.ArrayList)
+
+Time Log Link:
+https://docs.google.com/spreadsheets/d/1lA9IDxMlvwn2KnbLBLqlZPUooWh7hr3ekhfCKxlAwmg/edit?usp=sharing
+

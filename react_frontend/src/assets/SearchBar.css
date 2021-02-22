@@ -1,0 +1,24 @@
+.search-bar{
+    position: absolute;
+    width: 575.85px;
+    height: 77px;
+    left: 504.77px;
+    top: 256px;
+    background: #D3D3D3;
+}
+
+.search-bar input{
+    text-align: center;
+    position: absolute;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 44px;
+
+    color: #000000;
+}
+
+.search-bar ::placeholder {
+    color:black;
+}

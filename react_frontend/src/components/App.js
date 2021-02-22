@@ -4,9 +4,11 @@ import Spreadsheet from './Spreadsheet'
 import Home from './Home'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'; 
 
+
 class App extends Component {
   render() {
-    return (
+    // const { characters } = this.state
+    return(
       <Router>
         <div className="App">
           <NavBar />
@@ -96,6 +98,5 @@ class App extends Component {
 //     )
 //   }
 // }
-
 
 export default App

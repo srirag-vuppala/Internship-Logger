@@ -1,0 +1,17 @@
+.search-button input{
+    color: #FFFFFF;
+    font-family: 'Montserrat';
+    background-color: #660708;
+    position: absolute;
+    width: 174px;
+    height: 69.32px;
+    left: 1146px;
+    top: 256.16px;
+    border-radius: 33.5px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search-button:hover input{
+    background-color: #660708;
+}

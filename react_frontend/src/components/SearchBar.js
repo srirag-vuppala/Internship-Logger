@@ -31,9 +31,9 @@ const SearchBar = ({keyword,setKeyword}) => {
 export default SearchBar */
 
 import React from 'react';
-import '../assets/SearchBar.scss'
+/*import '../assets/SearchBar.scss'*/
 /*import './SearchBar.scss'*/
-class SearchBar extends React.Component {
+/*class SearchBar extends React.Component {
   constructor(props){
     super(props);
     this.state={term:''};
@@ -57,6 +57,17 @@ class SearchBar extends React.Component {
             </div>
         );
     }
+}*/
+
+function SearchBar() {
+  return (
+    <div className="SearchBar">
+        <input
+        type="text"
+        placeholder="Search Bar"
+        />
+    </div>
+  )
 }
 
 export default SearchBar;

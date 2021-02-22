@@ -63,7 +63,7 @@ import React from 'react';
 function SearchBar() {
   return (
     <div className="search-bar">
-        <input className="input-text"
+        <input
         type="text"
         placeholder="Search Bar"
         />

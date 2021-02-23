@@ -2,7 +2,7 @@
   
 
   .job-card{
-    position: relative;
+    position:fixed;
     list-style: none;
     font-family: 'Arial';
     font-weight: 200; 
@@ -18,28 +18,29 @@
   }
 
   .Company{
-      border-style: outset;
+      border-style:solid;
       border-width: 1mm;
       border-color: #6A040F;
       background-color: #C4C4C4;
   }
 
   .Position{
-    border-style: outset;
+    border-style: solid;
+    
     border-width: 1mm;
     border-color: #6A040F;
     background-color: #C4C4C4;
 }
 
 .JobLink{
-    border-style: outset;
+    border-style: solid;
     border-width: 1mm;
     border-color: #6A040F;
     background-color: #C4C4C4;
 }
 
 .Info{
-    border-style: outset;
+    border-style: solid;
     border-width: 1mm;
     border-color: #6A040F;
     background-color: #C4C4C4;

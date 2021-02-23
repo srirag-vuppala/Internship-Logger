@@ -8,7 +8,10 @@ class App extends Component {
   render() {
     return (
       <>
-        <JobCard Company="Apple" Position="Intern" JobLink="www.google.com" Information="Paid Internship, $50 an hour"/>
+        <JobCard Company="    Apple" 
+                 Position="   Intern" 
+                 JobLink="    www.google.com" 
+                 Information="Paid Internship, $50 an hour"/>
       </>
     )
   }

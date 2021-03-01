@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../assets/Home.css'
 import SearchBar from './SearchBar'
 import SearchButton from './SearchButton'
+import Dropdown from './Dropdown_Button'
 import Results from './Results'
 
 function Home() {
@@ -49,7 +50,12 @@ function Home() {
     return (
         <div>
             {/* filter dropdown thing here too */}
+            <div className="filter">
+                <Dropdown FilterType="  Filter Dropdown " />
+            </div>
+            <div className="searchbox">
             <SearchBar value={query} handleChange={e =>handleChange(e.target.value)} />
+            </div>
             <div className="results">
                 {/* <SearchButton onChange={handleOnInputChange}/> */}
                 <Results cards={query.length < 1 ? cards : filterDisplay} />

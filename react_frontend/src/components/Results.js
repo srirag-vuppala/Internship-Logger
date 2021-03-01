@@ -9,10 +9,12 @@ export default function Results({ cards }) {
             <div className="searchresults">
                 {cards.map((card, i) => (
                     <div className="li-ele" key={i}>
-                        <li>
+                        <li className="pos">
                             {/* {card.company} &nbsp;
                             <span>{card.position}</span> */}
-                            {card.company}
+                            <span className="title-company">{card.company}</span>
+                            <p>---</p>
+                            <span>Position Applied: {card.position}</span>
                         </li>
                     </div>
                 ))}

@@ -8,6 +8,7 @@ import $ from 'jquery';
 import Popper from 'popper.js';
 
 function Dropdown_Button(props) {
+    const [option, setOption] = useState("")
     
     return (
         <Dropdown>
@@ -17,9 +18,6 @@ function Dropdown_Button(props) {
         </Dropdown.Toggle>
         <link rel="stylesheet" type="text/css" href="Dropdown_Button.css"></link>
         
-        
-
-
         <Dropdown.Menu>
         <Dropdown.Item href="/">Waiting to Hear Back</Dropdown.Item>
         <Dropdown.Item href="/">Coding Challenge</Dropdown.Item>

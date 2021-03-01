@@ -7,13 +7,13 @@ import 'bootstrap/dist/js/bootstrap.js';
 import $ from 'jquery';
 import Popper from 'popper.js';
 
-function Dropdown_Button() {
+function Dropdown_Button(props) {
     
     return (
         <Dropdown>
         <Dropdown.Toggle variant="danger" id="dropdown-variants-Danger">
         {/* <Dropdown.Toggle class= "text-danger" variant="success" id="dropdown-basic"> */}
-        Filter
+        {props.FilterType}
         </Dropdown.Toggle>
         <link rel="stylesheet" type="text/css" href="Dropdown_Button.css"></link>
         

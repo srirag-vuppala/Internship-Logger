@@ -1,0 +1,49 @@
+  
+  
+
+  .job-card{
+    position:fixed;
+    list-style: none;
+    font-family: 'Arial';
+    font-weight: 200; 
+    padding: 20px;
+    border-style:solid;
+    border-width: 1mm;
+    width:50%;
+    left:25%;
+    bottom:25%;
+    color: black;
+    border-color: #6A040F;
+    background-color: #6A040F;
+  }
+
+  .Company{
+      border-style:solid;
+      border-width: 1mm;
+      border-color: #6A040F;
+      background-color: #C4C4C4;
+  }
+
+  .Position{
+    border-style: solid;
+    
+    border-width: 1mm;
+    border-color: #6A040F;
+    background-color: #C4C4C4;
+}
+
+.JobLink{
+    border-style: solid;
+    border-width: 1mm;
+    border-color: #6A040F;
+    background-color: #C4C4C4;
+}
+
+.Info{
+    border-style: solid;
+    border-width: 1mm;
+    border-color: #6A040F;
+    background-color: #C4C4C4;
+}
+
+  

@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <Dropdown_Button />
+        <Dropdown_Button FilterType="Filter"/>
       </>
     )
   }

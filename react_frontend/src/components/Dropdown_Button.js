@@ -13,7 +13,7 @@ function Dropdown_Button() {
         <Dropdown>
         <Dropdown.Toggle variant="danger" id="dropdown-variants-Danger">
         {/* <Dropdown.Toggle class= "text-danger" variant="success" id="dropdown-basic"> */}
-        Filter
+        {props.FilterType}
         </Dropdown.Toggle>
         <link rel="stylesheet" type="text/css" href="Dropdown_Button.css"></link>
         

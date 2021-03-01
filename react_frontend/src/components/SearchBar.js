@@ -60,15 +60,18 @@ import React from 'react';
     }
 }*/
 
-function SearchBar() {
+// const SearchBar = ({ parent }) {
+const SearchBar = ({ value, handleChange }) => {
   return (
     <div className="search-bar">
         <input
         type="text"
-        placeholder="Search Bar"
+        value={value}
+        placeholder="Company Name"
+        onChange={handleChange}
         />
     </div>
-  )
-}
+  );
+};
 
 export default SearchBar

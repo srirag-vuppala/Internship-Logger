@@ -1,0 +1,12 @@
+.results {
+    padding : 1em;
+    margin-left: 5em;
+    margin-right: 5em;
+    margin-top: 7em;
+    background-color: red;
+    color: white;
+    background: #DC2F02;
+    box-shadow: 0 4px 10px rgba(235, 0, 0, .50);  
+    border-radius: 15px;
+    height: 300px;
+}

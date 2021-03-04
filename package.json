@@ -1,1 +1,6 @@
-{}
+{
+  "dependencies": {
+    "emoji-dictionary": "^1.0.11",
+    "emoji-picker-react": "^3.4.2"
+  }
+}

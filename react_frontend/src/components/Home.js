@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import '../assets/Home.css'
 import SearchBar from './SearchBar'
-import SearchButton from './SearchButton'
 import Dropdown from './Dropdown_Button'
 import Results from './Results'
-import Select from "react-select";
 
 
 
@@ -25,7 +23,11 @@ function Home() {
         { company: "dodgers", position: "SWE", status:"coding"},
         { company: "giants", position: "SWE", status:"rejected"},
         { company: "red sox", position: "SWE", status:"coding"},
-        { company: "yahoo", position: "SWE", status:"offer"}
+        { company: "jupyter", position: "tpm", status:"offer"},
+        { company: "yahoo", position: "SWE", status:"interview"},
+        { company: "qk", position: "SWE", status:"waiting"},
+        { company: "nasdaq", position: "data entry intern", status:"offer"},
+        { company: "reddit", position: "manager", status:"coding"}
     ]);
 
     const handleChange = e => {

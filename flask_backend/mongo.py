@@ -43,7 +43,7 @@ class Model(dict):
             resp = self.collection.remove({"_id": ObjectId(self._id)})
             self.clear()
             return resp
-
+#asdf
 class Job(Model):
     db_client = pymongo.MongoClient('localhost', 27017)  #change if your db is in another host and port
     collection = db_client["jobs"]["job_list"]  #db name is 'users' and collection name is 'users_list'

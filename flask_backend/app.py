@@ -11,7 +11,7 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-#app
+#apps
 
 jobs = { # users before
    'job_list' : # users_list before

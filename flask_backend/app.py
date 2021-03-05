@@ -19,110 +19,17 @@ jobs = { # users before
          'company' : 'google',
          'status': 'Waiting to Hear Back',
          'additional_info': 'i am so excited',
+         '_id': '12345678910ac43185927543',
       },
       {
          'position' : '',
          'company' : '',
          'status': '',
          'additional_info': '',
+         '_id': '000000000000000000000000',
       }
  ]
 }
-
-"""
-from model_mongodb import User
-
-
-app = Flask(__name__)
-#CORS stands for Cross Origin Requests.
-#Here we'll allow requests coming from any domain. Not recommended for production environment.
-CORS(app) 
-
-users = { 
-   'users_list' : []
-}
-
-
-@app.route('/')
-
-def hello_world():
-    return 'Hello, World!'
-    
-# def gen_random_id():
-#   random_id = ''.join([random.choice(string.ascii_letters 
-#            + string.digits) for n in range(6)]) 
-#   print (random_id)
-#   return random_id
-
-
-@app.route('/users', methods=['GET', 'POST'])
-def get_users():
-   if request.method == 'GET':
-      search_username = request.args.get('name')
-      search_job = request.args.get('job')
-      if search_username and search_job :
-         #return find_users_by_name_job(search_username, search_job) 
-         users = User().find_by_name_job(search_username, search_job)
-      elif search_username  :
-         users = User().find_by_name(search_username)
-      elif search_job  :
-         return find_users_by_job(search_job) 
-      else:
-         users = User().find_all()
-      return {"users_list": users}
-   elif request.method == 'POST':
-      userToAdd = request.get_json()
-      # userToAdd['id'] = gen_random_id() # check for duplicate before appending.. todo
-      # users['users_list'].append(userToAdd)
-
-      # make DB request to add user
-      newUser = User(userToAdd)
-      newUser.save()
-      resp = jsonify(newUser), 201
-      return resp
-   #elif request.method == 'DELETE':
-   #   userToDelete = request.get_json()
-   #   users['users_list'].remove(userToDelete)
-   #   resp = jsonify(success=True)
-   #   resp.status_code = 200
-      # 200 is the default code for a normal response
-   #   return resp
-      
-@app.route('/users/<id>', methods=['GET', 'DELETE'])
-
-def get_user(id):
-   if request.method == 'GET':
-      user = User({"_id":id})
-      if user.reload() :
-         return user
-      else :
-         return jsonify({"error": "User not found"}), 404
-
-   elif request.method == 'DELETE':
-      user = User({"_id":id})
-      resp = user.remove()
-      print(f'resp = {resp}')
-      if resp['n'] == 1:
-         return {}, 204
-      #if user.reload() :
-      #   return user
-      else :
-         return jsonify({"error": "User not found"}), 404
-      
-#def find_users_by_name_job(name, job):
-#   subdict = {'users_list' : []}
-#   for user in users['users_list']:
-#      if user['name'] == name and user['job'] == job:
-#         subdict['users_list'].append(user)
-#   return subdict 
-
-def find_users_by_job(job):
-   subdict = {'users_list' : []}
-   for user in users['users_list']:
-      if user['job'] == job:
-         subdict['users_list'].append(user)
-   return subdict 
-"""
 
 def getJobsFromQuery():
    search_status = request.args.get('status')
@@ -130,7 +37,7 @@ def getJobsFromQuery():
    if search_status:
       jobs = Job().find_by_status(search_status)# just need this
    elif search_name:
-      jobs = Job().find_by_name(search_name)
+      jobs = Job().find_by_company(search_name)
    return {"job_list": jobs}                    # make sure this is returning correctly
 
 
@@ -144,11 +51,11 @@ def getJobsFromQuery():
 
 #    return
  
-def addJob(): # consider making an ID field for each job
+ 
+def addJob(): 
    jobToAdd = request.get_json()
+   jobs['job_list'].append(jobToAdd) 
    # userToAdd['id'] = gen_random_id()     # check for duplicate before appending.. todo
-   # users['users_list'].append(userToAdd)
-
    # make DB request to add user
    newJob = Job(jobToAdd)
    newJob.save()
@@ -156,21 +63,18 @@ def addJob(): # consider making an ID field for each job
    return resp
 
 
-
-   jobToAdd = request.get_json() # double check that we actually have this object
-   jobs['job_list'].append(jobToAdd) # MAKE SURE jobs AND job_list ARE THE CORRECT VARIABLES
-   resp = jsonify(jobToAdd)
-
 def deleteJob():
-   job = Job({"company":company})                  # make sure this is correct, before it was: User({"_id":id})
-   resp = job.remove()                    # make sure that this line works correctly
-   print(f'resp = {resp}')
+   jobToDelete = request.get_json()
+   resp = jobToDelete.remove()            # DOUBLE CHECK THAT THIS WORKS                  
+   #print(f'resp = {resp}')
    if resp['n'] == 1:                     # WHAT DOES THIS DO?????
       return {}, 204
    #if user.reload() :
    #   return user
    else :
       return jsonify({"error": "job not found"}), 404
+
+
 
 @app.route('/spreadsheet', methods=['POST','DELETE'])  #ADDED EDIT HERE (removed POST)
 # make this the home page
@@ -201,7 +105,35 @@ def homePage():
    # elif request.method == 'EDIT':   # WE ONLY NEED THIS IF WE CAN EDIT FROM FRONT PAGE EDIT BUTTON
    #    return editJob()
       
+def main():
+   #deleteJob = ({"position":"macs anus plug","company":"google","status":"Waiting to Hear Back","additional_info":"i am so excited"})
+   #job = Job("_id":"12345678910ac43185927543")
+   #jobs = find_by_company("google")
+   #for job in jobs:
+   #   job.remove()
 
+
+# GET TESTING
+   # search_status = ""
+   # search_name = "apple"
+   # if search_status:
+   #    jobs = Job().find_by_status(search_status)# just need this
+   # elif search_name:
+   #    jobs = Job().find_by_company(search_name)
+   # print({"job_list": jobs})                    # make sure this is returning correctly
+
+
+# DELETE TESTING
+   # thisID = "12345678910ac43185927543"
+   # # job = Job({"_id": thisID})           # for some reason this isnt getting the job correctly
+   # print("job: " + str(job))
+   # resp = job.remove() 
+   # print("resp: " + str(resp))
+   # return 
+
+
+if __name__ == "__main__":
+   main()
 """
 DONE 1. Get delete method from Harumi 
 

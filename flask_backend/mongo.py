@@ -9,26 +9,38 @@ class Model(dict):
     __delattr__ = dict.__delitem__
     __setattr__ = dict.__setitem__
 
+
     def save(self):
-        if not self.company:
+        if not self._id:
             self.collection.insert(self)
         else:
             self.collection.update(
-                { "company": ObjectId(self.company) }, self)
-        self.company = str(self.company)
+                { "_id": ObjectId(self._id) }, self)
+        self._id = str(self._id)
+
+
+    # def save(self):
+    #     if not self._id:
+    #         self.collection.insert(self)
+    #     else:
+    #         self.collection.update(
+    #             { "_id": ObjectId(self._id) }, self)
+    #     self._id = str(self._id)
 
     def reload(self):
-        if self.company:
-            result = self.collection.find_one({"company": ObjectId(self.company)})
+        if self._id:
+            result = self.collection.find_one({"_id": ObjectId(self._id)})
             if result :
                 self.update(result)
-                self.company = str(self.company)
+                self._id = str(self._id)
                 return True
         return False
 
     def remove(self):
-        if self.company:
-            resp = self.collection.remove({"company": ObjectId(self.company)})
+        if self._id:
+            print("curr id: " + str(self._id))
+            print("curr company: " + str(self.company))
+            resp = self.collection.remove({"_id": ObjectId(self._id)})
             self.clear()
             return resp
 
@@ -39,27 +51,27 @@ class Job(Model):
     def find_all(self):
         users = list(self.collection.find())
         for user in users:
-            user["company"] = str(user["company"])
+            user["_id"] = str(user["_id"])
         return users
     
     def find_by_name_and_job(self, name, job):
         users = list(self.collection.find({"name": name, "job": job}))
         for user in users:
-            user["company"] = str(user["company"])
+            user["_id"] = str(user["_id"])
         return users
 
 
-    def find_by_name(self, company):
+    def find_by_company(self, company):
         jobs = list(self.collection.find({"company": company}))
 #        for job in jobs:
-#           job["company"] = str(job["company"])
+#           job["_id"] = str(job["_id"])
         return jobs
    
 
-   def find_by_status(self, status):
+    def find_by_status(self, status):
         jobs = list(self.collection.find({"status": status}))
 #        for job in jobs:
-#           job["company"] = str(job["company"])
+#           job["_id"] = str(job["_id"])
         return jobs
        
 

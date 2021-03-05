@@ -32,7 +32,7 @@ jobs = { # users before
       }
  ]
 }
-
+// macs function
 def getJobsFromQuery():
    search_status = request.args.get('status')
    search_name = request.args.get('company')
@@ -41,7 +41,7 @@ def getJobsFromQuery():
    elif search_name:
       jobs = Job().find_by_company(search_name)
    return {"job_list": jobs}                    # make sure this is returning correctly
-
+// right here
 
 # def editJob(): # can either do a delete and then an add or write a new mongo function that edits the job
 

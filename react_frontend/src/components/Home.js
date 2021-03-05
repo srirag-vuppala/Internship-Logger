@@ -1,20 +1,87 @@
-import React from 'react'
-import '../assets/NavBar.css'
+import React, { useState} from 'react'
+import '../assets/Home.css'
 import SearchBar from './SearchBar'
-import SearchButton from './SearchButton'
+import Dropdown from './Dropdown_Button'
+import Results from './Results'
 
-export default function Home() {
+
+
+function Home() {
+    const [query, setQuery] = useState('');
+    // for the dropdown
+    const [selectedOption, setSelectedOption] = useState('');
+
+    const [filterDisplay, setFilterDisplay] = useState([]);
+
+    const [cards] = useState([
+        { company: "google", position: "SWE", status: "waiting"},
+        { company: "google", position: "Data Analyst", status: "interview"},
+        { company: "facebook", position: "SWE", status:"coding"},
+        { company: "apple", position: "SWE", status: "waiting"},
+        { company: "jupyter", position: "SWE", status:"coding"},
+        { company: "cal poly", position: "SWE", status:"interview"},
+        { company: "dodgers", position: "SWE", status:"coding"},
+        { company: "giants", position: "SWE", status:"rejected"},
+        { company: "red sox", position: "SWE", status:"coding"},
+        { company: "jupyter", position: "tpm", status:"offer"},
+        { company: "yahoo", position: "SWE", status:"interview"},
+        { company: "qk", position: "SWE", status:"waiting"},
+        { company: "nasdaq", position: "data entry intern", status:"offer"},
+        { company: "reddit", position: "manager", status:"coding"}
+    ]);
+
+    const handleChange = e => {
+        setQuery(e);
+        let oldList = cards.map(card => {
+            return { company: card.company.toLowerCase(), position: card.position, status: card.status};
+        }
+        );
+
+        if (e !== "") {
+            let newList = [];
+            newList = oldList.filter( card =>
+                card.company.includes(e.toLowerCase())
+            );
+
+            setFilterDisplay(newList);
+        } else{
+            setFilterDisplay(cards)
+        }
+    };
+
+    const handleDropdownChange = e => {
+        setSelectedOption(e);
+
+        let oldList = cards.map(card => {
+            return { company: card.company, position: card.position, status: card.status.toLowerCase() };
+        }
+        );
+        if ( e !== "") {
+            let newList = [];
+            newList = oldList.filter( card =>
+                card.status.includes(e.toLowerCase())
+            );
+
+            setFilterDisplay(newList);
+        } else{
+            setFilterDisplay(cards)
+        }
+    }
+
     return (
         <div>
-        <div className="container">
-        {/*<Table characterData={characters} removeCharacter={this.removeCharacter} />
-        <Form handleSubmit={this.handleSubmit}/>*/}
-        {/*<SearchBar searchBoxName={"userNameSearch"} onSearchTermChange={this.onSearch} />*/}
-        {/*<input type="text" placeholder="Search Bar" placeholderTextColor="#000000" style={{fontFamily:'Montserrat', textAlign: 'center', position: 'absolute', width: 587.53, height: 77, left: 504.77, top: 256, background: '#D3D3D3', fontSize: 36}} />*/}
-        <SearchBar />
-        <SearchButton />
-        {/*<input type="button" value="Search" style={{color: '#FFFFFF', fontFamily:'Montserrat', background: '#660708', position: 'absolute', width: 174, height: 69.32, left: 1146, top: 256.16, borderRadius: 33.5, fontSize: 24, fontWeight: 'bold'}} onClick={this.submitForm} />*/}
-      </div>
+            {/* filter dropdown thing here too */}
+            <div className="filter">
+                <Dropdown FilterType="Filter Dropdown" value={selectedOption} handleSelect={handleDropdownChange}/>
+            </div>
+            <div className="searchbox">
+            <SearchBar value={query} handleChange={e =>handleChange(e.target.value)} />
+            </div>
+            <div className="results">
+                <Results cards={query.length < 1 && selectedOption.length < 1 ? cards : filterDisplay} />
+            </div>
         </div>
-    )
-}
+    );
+};
+
+export default Home;

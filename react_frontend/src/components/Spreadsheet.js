@@ -46,7 +46,6 @@ class Spreadsheet extends React.Component {
     
 		return(
       <div style={ style }>
-        <h2>Spreadsheet</h2>
 			<SpreadsheetBoard />
       </div>
 		);
@@ -147,12 +146,14 @@ class SpreadsheetColumn extends React.Component {
 			'marginRight': '5px',
 			'marginLeft': '20px',
 			'marginBottom': '5px',
-			'paddingLeft': '5px',
-			'paddingTop': '0px',
+			'paddingLeft': '8px',
+			'paddingRight': '5px',
+			'paddingTop': '10px',
 			'width': '230px',
 			'border-radius': '15px',
+    		'box-shadow': '0 4px 10px rgba(235, 0, 0, .60)',  
 			'textAlign': 'center',
-			'backgroundColor': (this.state.mouseIsHovering) ? '#d3d3d3' : '#f0eeee',
+			'backgroundColor': (this.state.mouseIsHovering) ? '#000000' : 'rgba(235,0,0, .80)',
 			'font-family': 'Montserrat'
 		};
 		return  (
@@ -161,7 +162,12 @@ class SpreadsheetColumn extends React.Component {
 				onDragEnter={(e) => {this.setState({ mouseIsHovering: true }); this.props.onDragEnter(e, this.props.stage);}}
 				onDragExit={(e) => {this.setState({ mouseIsHovering: false });}}
 			>
-				<h4><u>{emoji_choose(this.props.stage)}{this.props.name} ({this.props.jobs.length})</u></h4>
+				<h5 style={{
+							'backgroundColor':'rgba(30,30,30,0.6)',
+							'color':'white',
+							'border-radius': '5px',
+    						'box-shadow': '0 4px 10px rgba(235, 0, 0, .50)',  
+						    'font-family':'Montserrat'}}>{emoji_choose(this.props.stage)}{this.props.name} ({this.props.jobs.length})</h5>
 				{this.generateSpreadsheetCards()}
 				<br/>
       </div>);
@@ -188,7 +194,9 @@ class SpreadsheetCard extends React.Component {
 			'marginLeft': '0px',
 			'marginRight': '5px',
 			'marginBottom': '5px',
-			'font-family': 'Montserrat'
+			'font-family': 'Montserrat',
+			'box-shadow': '0 4px 12px rgba(235, 0, 0, .60)',  
+			'border-radius': '13px'
 		};
 
 		return (
@@ -201,14 +209,22 @@ class SpreadsheetCard extends React.Component {
 			>
 				{/* <div><h4>{this.props.project.name}</h4></div> */}
 				<Card.Header>{this.props.job.name}</Card.Header>
-				{(this.state.collapsed)
-					? null
-					: (<div><strong>Description: </strong>{ this.props.job.description }<br/></div>)
-				}
 				<Card.Body
-					style={{'width': '100%' , 'height': '10%'}}
+					style={{'width': '100%' ,
+						    'height': '60%',
+						    'font-size': '14px',
+						    'paddingLeft': '5px',
+						    'paddingRight': '5px'
+
+						}}
 					onClick={(e) => {this.setState({collapsed: !this.state.collapsed});}}
 				>
+				{(this.state.collapsed)
+					? null
+					: (<div><strong>Position: </strong>{ this.props.job.position }<br/></div>)
+				}
+
+
 					{(this.state.collapsed) ? String.fromCharCode('9660') : String.fromCharCode('9650')}
 				</Card.Body>
 			</Card>
@@ -221,40 +237,55 @@ class SpreadsheetCard extends React.Component {
  */
 let jobList = [
   {
-    name: 'Job - 1',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
+    name: 'Google',
+    position: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
     job_stage: 1
   },
   {
-    name: 'Job - 2',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
+    name: 'Jupyter',
+    position : 'SWE ',
     job_stage: 1
   },
   {
     name: 'Job - 3',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
+    position : 'SWE ',
     job_stage: 1
   },
   {
     name: 'Job - 4',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
+    position: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
     job_stage: 2
   },
   {
     name: 'Job - 5',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
+    position : 'SWE ',
     job_stage: 3
   },
   {
     name: 'Job - 6',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
+    position : 'SWE ',
     job_stage: 3
   },
   {
     name: 'Job - 7',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
+    position : 'SWE ',
     job_stage: 4
   },
+
+	    // { company: "google", position: "SWE", status: "waiting"},
+        // { company: "google", position: "Data Analyst", status: "interview"},
+        // { company: "facebook", position: "SWE", status:"coding"},
+        // { company: "apple", position: "SWE", status: "waiting"},
+        // { company: "jupyter", position: "SWE", status:"coding"},
+        // { company: "cal poly", position: "SWE", status:"interview"},
+        // { company: "dodgers", position: "SWE", status:"coding"},
+        // { company: "giants", position: "SWE", status:"rejected"},
+        // { company: "red sox", position: "SWE", status:"coding"},
+        // { company: "jupyter", position: "tpm", status:"offer"},
+        // { company: "yahoo", position: "SWE", status:"interview"},
+        // { company: "qk", position: "SWE", status:"waiting"},
+        // { company: "nasdaq", position: "data entry intern", status:"offer"},
+        // { company: "reddit", position: "manager", status:"coding"
 ];
 
 export default Spreadsheet 

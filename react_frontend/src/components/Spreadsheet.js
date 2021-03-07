@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card'
-import axios from 'axios'
+import Popup from './Popup'
 
 
 const emoji = require("emoji-dictionary")
@@ -30,16 +30,44 @@ const emoji_choose = e => {
  * The Spreadsheet React component
  */
 class Spreadsheet extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			isOpen: false
+		};
+	}
 	render(){
 		const style = {
 			'padding': '30px',
 			'paddingTop': '10px',
 			'font-family': 'Montserrat'
 		};
+		{/*const [isOpen, setIsOpen] = useState(false);*/}
+ 
+		const togglePopup = () => {
+		  this.setState({isOpen: !this.state.isOpen});
+		}
     
 		return(
+			
       <div style={ style }>
 			<SpreadsheetBoard />
+			<div>
+    <input
+      type="button"
+      value="Click to Open Popup"
+      onClick={togglePopup}
+    />
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    {this.state.isOpen && <Popup
+      content={<>
+        <b>Design your Popup</b>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <button>Test button</button>
+      </>}
+      handleClose={togglePopup}
+    />}
+  </div>
       </div>
 		);
 	}
@@ -69,8 +97,6 @@ class SpreadsheetBoard extends React.Component {
 
 	componentDidMount() {
 		this.setState({ jobs: jobList, isLoading: false });
-		// I think bottom is right
-		// this.setState({ jobs: getBackendInfo(), isLoading: false });
 	}
 
 	//this is called when a Kanban card is dragged over a column (called by column)
@@ -231,19 +257,6 @@ class SpreadsheetCard extends React.Component {
 /*
  * Projects to be displayed on Scrum Board
  */
-function getBackendInfo() {
-    axios.get('http://localhost:5000/')
-    .then(res => {
-        const characters = res.data.job_list;
-        //this.setState({ characters });
-        console.log(characters);
-        return characters;
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-};
-
 let jobList = [
 	    { company: "google", position: "SWE", status: "waiting", additional_info: "mish"},
         { company: "google", position: "Data Analyst", status: "interview", additional_info: "mish"},
@@ -261,4 +274,4 @@ let jobList = [
         { company: "reddit", position: "manager", status:"coding", additional_info: "mish"}
 ];
 
-export default Spreadsheet
+export default Spreadsheet 

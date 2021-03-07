@@ -82,7 +82,6 @@ class SpreadsheetBoard extends React.Component {
 		this.setState({ jobs: updatedJobs });
 		console.log(this.state.jobs)
 		// We'll probably need to do some axios bs to update the backend with the changed status
-
 	}
 
 	render() {

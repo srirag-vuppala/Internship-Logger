@@ -57,7 +57,7 @@ class Spreadsheet extends React.Component {
 			<div>
     <input
       type="button"
-      value="Click to Open Popup"
+      value="Add"
       onClick={togglePopup}
     />
     {this.state.isOpen && <Popup className="add-popup"

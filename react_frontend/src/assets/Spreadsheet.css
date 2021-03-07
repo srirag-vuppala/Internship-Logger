@@ -23,14 +23,27 @@
 .Enter-Position-box {
     margin-top: 3em;
 }
+
+.Enter-Position-box input {
+    color: white;
+}
 .Enter-Company-Name-box {
     margin-top: 2em;
 }
+
+.Enter-Company-Name-box input {
+    color: white;
+}
+
 .Current-Stage-Of-Process {
     margin-top: 2em;
 }
 .Additional-Information-box{
     margin-top: 2em;
+}
+
+.Additional-Information-box input {
+    color: white;
 }
 
 .Current-Stage-Of-Process-Result {

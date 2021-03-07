@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 class Form extends Component {
     initialState = {
         name: '',
+        bye bi
         job: '',
     }
     state = this.initialState

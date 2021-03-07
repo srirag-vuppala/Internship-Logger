@@ -32,7 +32,7 @@ const emoji_choose = e => {
     }
 }
 
-const Dropdown_Button = ({FilterType, handleSelect}) => {
+const Dropdown_Button = ({titleDrop, handleClick,  handleSelect}) => {
     return (
         <>
           <style type="text/css">
@@ -60,7 +60,9 @@ const Dropdown_Button = ({FilterType, handleSelect}) => {
           </style>
           <DropdownButton 
             onSelect={handleSelect} 
-            title={FilterType}
+            title={titleDrop}
+            // onClick={handleClick}
+            // title=
             variant="danger"
             bsPrefix="super-colors"
             >
@@ -70,6 +72,7 @@ const Dropdown_Button = ({FilterType, handleSelect}) => {
               <Dropdown.Item eventKey="offer">{emoji_choose("offer")}Offer</Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item eventKey="rejected">{emoji_choose("rejected")}Rejected</Dropdown.Item>
+              {/* <Dropdown.Item eventKey="rejected" as="button"><div onClick={(e) => this.changeValue(e.target.textContent)}>Item #1</div></Dropdown.Item> */}
           </DropdownButton>
         </>
     )  

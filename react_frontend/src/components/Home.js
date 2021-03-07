@@ -5,6 +5,27 @@ import Dropdown from './Dropdown_Button'
 import Results from './Results'
 
 
+const drop_choose = e => {
+    if (e === "waiting") {
+        return "Waiting to hear back"
+    }
+    else if(e === "coding") {
+        return "Coding Challenge"
+    }
+    else if(e === "interview") {
+        return "Interview"
+    }
+    else if(e === "offer") {
+        return "Offer"
+    }
+    else if(e === "rejected") {
+        return "Rejected"
+    }
+    else {
+        return "Nyet"
+    }
+}
+
 
 function Home() {
     const [query, setQuery] = useState('');
@@ -12,6 +33,8 @@ function Home() {
     const [selectedOption, setSelectedOption] = useState('');
 
     const [filterDisplay, setFilterDisplay] = useState([]);
+
+    const [titleDrop, setTitleDrop] = useState('Filter Dropdown')
 
     let jobList = [    
         { company: "google", position: "SWE", status: "waiting"},
@@ -52,6 +75,7 @@ function Home() {
 
     const handleDropdownChange = e => {
         setSelectedOption(e);
+        setTitleDrop(drop_choose(e));
 
         let oldList = cards.map(card => {
             return { company: card.company, position: card.position, status: card.status.toLowerCase() };
@@ -68,12 +92,14 @@ function Home() {
             setFilterDisplay(cards)
         }
     }
+    const handleTitleDrop = e => {
+    }
 
     return (
         <div>
             {/* filter dropdown thing here too */}
             <div className="filter">
-                <Dropdown FilterType="Filter Dropdown" value={selectedOption} handleSelect={handleDropdownChange}/>
+                <Dropdown titleDrop={titleDrop} handleClick={handleTitleDrop} value={selectedOption} handleSelect={handleDropdownChange}/>
             </div>
             <div className="searchbox">
             <SearchBar value={query} handleChange={e =>handleChange(e.target.value)} />

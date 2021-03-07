@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
+import axios from 'axios'
 
 
 const emoji = require("emoji-dictionary")
@@ -68,6 +69,8 @@ class SpreadsheetBoard extends React.Component {
 
 	componentDidMount() {
 		this.setState({ jobs: jobList, isLoading: false });
+		// I think bottom is right
+		// this.setState({ jobs: getBackendInfo(), isLoading: false });
 	}
 
 	//this is called when a Kanban card is dragged over a column (called by column)
@@ -228,6 +231,19 @@ class SpreadsheetCard extends React.Component {
 /*
  * Projects to be displayed on Scrum Board
  */
+function getBackendInfo() {
+    axios.get('http://localhost:5000/')
+    .then(res => {
+        const characters = res.data.job_list;
+        //this.setState({ characters });
+        console.log(characters);
+        return characters;
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+};
+
 let jobList = [
 	    { company: "google", position: "SWE", status: "waiting", additional_info: "mish"},
         { company: "google", position: "Data Analyst", status: "interview", additional_info: "mish"},

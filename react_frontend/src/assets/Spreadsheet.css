@@ -1,3 +1,14 @@
+.add-popup {
+    position: absolute;
+    width: 896px;
+    height: 631px;
+    left: 272px;
+    top: 135px;
+
+    background: #6A040F;
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
+}
+
 .current-stage-of-process {
     font-family: 'Montserrat';
     position: absolute;
@@ -7,16 +18,5 @@
     left: 15%;
     z-index: 10;
     transform: scale(1.2);
-}
-
-.add-popup .popup-content {
-    position: absolute;
-    width: 896px;
-    height: 631px;
-    left: 272px;
-    top: 135px;
-
-    background: #6A040F;
-    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25);
 }
 

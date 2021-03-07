@@ -21,7 +21,7 @@
 }
 
 .Enter-Position-box {
-    margin-top: 2em;
+    margin-top: 3em;
 }
 .Enter-Company-Name-box {
     margin-top: 2em;
@@ -45,3 +45,38 @@
 .Submit-Position:hover{
     background-color: #C4C4C4
 }
+
+.Submit-Position:after{
+    background-color: #C4C4C4
+}
+
+.Submit-Position:enabled{
+    background-color: #C4C4C4
+}
+
+
+.Add-Button {
+    font-family: 'Monsterrat';
+    box-shadow: 0 4px 10px rgba(235, 0, 0, .50);
+    background-color: #DC2F02;
+    margin-top: -90em;
+    margin-left: 85em
+}
+
+.Add-Button:hover {
+    box-shadow: 0 4px 10px rgba(235, 0, 0, .50);
+    background-color: #DC2F02;
+}
+
+.Add-Button:after {
+    box-shadow: 0 4px 10px rgba(235, 0, 0, .50);
+    background-color: #DC2F02;
+}
+
+.Add-Button:enabled {
+    box-shadow: 0 4px 10px rgba(235, 0, 0, .50);
+    background-color: #DC2F02;
+}
+
+
+

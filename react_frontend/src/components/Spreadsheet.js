@@ -55,7 +55,8 @@ class Spreadsheet extends React.Component {
       <div style={ style }>
 			<SpreadsheetBoard />
 			<div>
-    <input
+    <input className="Add-Button"
+	  bsPrefix="super-colors"
       type="button"
       value="Add"
       onClick={togglePopup}

@@ -84,7 +84,8 @@ class Spreadsheet extends React.Component {
 			placeholder="Additional Information"
 			/>
 		</div>
-		<button>Test button</button>
+		<button>Cancel</button>
+		<button>Submit Position</button>
       </>}
       handleClose={togglePopup}
     />}

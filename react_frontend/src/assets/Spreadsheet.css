@@ -1,0 +1,11 @@
+.Current-Stage-Of-Process {
+    font-family: 'Montserrat';
+    position: absolute;
+    /* margin-top: 4em; */
+    /* margin-left: 14em; */
+    top: 27%;
+    left: 15%;
+    z-index: 10;
+    transform: scale(1.2);
+
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card'
 import Popup from './Popup'
 import Dropdown from './Dropdown_Button'
+import '../assets/Spreadsheet.css'
 
 
 const emoji = require("emoji-dictionary")
@@ -76,7 +77,7 @@ class Spreadsheet extends React.Component {
 			/>
 		</div>
 		<div className="Current-Stage-Of-Process">
-			<Dropdown/>
+			<Dropdown FilterType="Current Stage of Process"/>
 		</div>
 		<div className="Additional-Information-box">
 			<input

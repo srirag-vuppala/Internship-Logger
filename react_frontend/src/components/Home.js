@@ -13,7 +13,7 @@ function Home() {
 
     const [filterDisplay, setFilterDisplay] = useState([]);
 
-    const [cards] = useState([
+    let jobList = [    
         { company: "google", position: "SWE", status: "waiting"},
         { company: "google", position: "Data Analyst", status: "interview"},
         { company: "facebook", position: "SWE", status:"coding"},
@@ -27,8 +27,9 @@ function Home() {
         { company: "yahoo", position: "SWE", status:"interview"},
         { company: "qk", position: "SWE", status:"waiting"},
         { company: "nasdaq", position: "data entry intern", status:"offer"},
-        { company: "reddit", position: "manager", status:"coding"}
-    ]);
+        { company: "reddit", position: "manager", status:"coding"}];
+
+    const [cards] = useState(jobList);
 
     const handleChange = e => {
         setQuery(e);

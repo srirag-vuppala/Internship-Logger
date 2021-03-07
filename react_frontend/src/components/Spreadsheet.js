@@ -78,6 +78,12 @@ class Spreadsheet extends React.Component {
 		<div className="Current-Stage-Of-Process">
 			<Dropdown FilterType="Current Stage of Process"/>
 		</div>
+		{/*<div className="Current-Stage-of-Process-Result">
+			<input
+				value="hi"
+				disabled
+			/>
+	  </div>*/}
 		<div className="Additional-Information-box">
 			<input
 			type="text"

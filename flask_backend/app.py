@@ -15,24 +15,17 @@ CORS(app)
 
 jobs = { # users before
    'job_list' : # users_list before
-   [
-      { 
-         'position' : 'janitor',
-         'company' : 'google',
-         'status': 'Waiting to Hear Back',
-         'additional_info': 'i am so excited',
-         '_id': '12345678910ac43185927543',
-      },
-      {
-         'position' : '',
-         'company' : '',
-         'status': '',
-         'additional_info': '',
-         '_id': '000000000000000000000000',
-      }
- ]
+   [ 
+   {
+   '_id':'32345678910ac43185927543', 
+   'position':'balls', 
+   'company':'ligma', 
+   'status':'Coding Challenge', 
+   'additional_info':'i am not excited'
+   }
+   ]
 }
-// macs function
+
 def getJobsFromQuery():
    search_status = request.args.get('status')
    search_name = request.args.get('company')
@@ -41,17 +34,6 @@ def getJobsFromQuery():
    elif search_name:
       jobs = Job().find_by_company(search_name)
    return {"job_list": jobs}                    # make sure this is returning correctly
-// right here
-
-# def editJob(): # can either do a delete and then an add or write a new mongo function that edits the job
-
-#    # we need the old name of the job in order to do a delete, maybe new delete that takes in a name??
-
-
-#    # we then want the new date in order to do a job add
-
-
-#    return
  
  
 def addJob(): 
@@ -86,9 +68,7 @@ def spreadsheet():
 
    elif request.method == 'DELETE':
       return deleteJob()
-                                  
-   # elif request.method == 'EDIT': # IS THERE AN AXIOS EDIT????
-   #    return editJob()
+   return "sad"
       
 
 
@@ -96,18 +76,18 @@ def spreadsheet():
 # make this the home page
 def homePage():
    if request.method == 'GET':
-      return getJobsFromQuery()
+      print("made it into GET")
+      jobs = Job().find_all()
+      print(jobs)
+      return {"job_list": jobs} 
+      #return getJobsFromQuery()
        
    elif request.method == 'POST':   # WE ONLY NEED THIS IF WE CAN ADD FROM FRONT PAGE EDIT BUTTON
      return jobToAdd()
 
    elif request.method == 'DELETE': # WE ONLY NEED THIS IF WE CAN DELETE FROM FRONT PAGE EDIT BUTTON
       return deleteJob()
-                                    # IS THERE AN AXIOS EDIT????
-   # elif request.method == 'EDIT':   # WE ONLY NEED THIS IF WE CAN EDIT FROM FRONT PAGE EDIT BUTTON
-   #    return editJob()
-      
-def main():
+   return "sad"
    #deleteJob = ({"position":"macs anus plug","company":"google","status":"Waiting to Hear Back","additional_info":"i am so excited"})
    #job = Job("_id":"12345678910ac43185927543")
    #jobs = find_by_company("google")
@@ -134,8 +114,6 @@ def main():
    # return 
 
 
-if __name__ == "__main__":
-   main()
 """
 DONE 1. Get delete method from Harumi 
 

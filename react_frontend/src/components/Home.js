@@ -1,8 +1,9 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import '../assets/Home.css'
 import SearchBar from './SearchBar'
 import Dropdown from './Dropdown_Button'
 import Results from './Results'
+import axios from 'axios';
 
 
 
@@ -12,23 +13,15 @@ function Home() {
     const [selectedOption, setSelectedOption] = useState('');
 
     const [filterDisplay, setFilterDisplay] = useState([]);
-
-    const [cards] = useState([
-        { company: "google", position: "SWE", status: "waiting"},
-        { company: "google", position: "Data Analyst", status: "interview"},
-        { company: "facebook", position: "SWE", status:"coding"},
-        { company: "apple", position: "SWE", status: "waiting"},
-        { company: "jupyter", position: "SWE", status:"coding"},
-        { company: "cal poly", position: "SWE", status:"interview"},
-        { company: "dodgers", position: "SWE", status:"coding"},
-        { company: "giants", position: "SWE", status:"rejected"},
-        { company: "red sox", position: "SWE", status:"coding"},
-        { company: "jupyter", position: "tpm", status:"offer"},
-        { company: "yahoo", position: "SWE", status:"interview"},
-        { company: "qk", position: "SWE", status:"waiting"},
-        { company: "nasdaq", position: "data entry intern", status:"offer"},
-        { company: "reddit", position: "manager", status:"coding"}
-    ]);
+    
+    const [cards, setCards] = useState([])
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios('http://localhost:5000/');
+            setCards(result.data.job_list);
+        }; 
+        fetchData();
+    }, []);
 
     const handleChange = e => {
         setQuery(e);

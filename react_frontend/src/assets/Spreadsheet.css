@@ -20,3 +20,28 @@
     transform: scale(1.2);
 }
 
+.Enter-Position-box {
+    margin-top: 2em;
+}
+.Enter-Company-Name-box {
+    margin-top: 2em;
+}
+.Current-Stage-Of-Process {
+    margin-top: 2em;
+}
+.Additional-Information-box{
+    margin-top: 2em;
+}
+
+.Submit-Position {
+    margin-top: 5em;
+    margin-left: 14.5em;
+    width: 252px;
+    height: 62px;
+
+    background-color: #C4C4C4
+}
+
+.Submit-Position:hover{
+    background-color: #C4C4C4
+}

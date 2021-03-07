@@ -10,9 +10,9 @@
    
   .box {
     position: relative;
-    width: 70%;
+    width: 50%;
     margin: 0 auto;
-    height: auto;
+    height: 75%;
     max-height: 70vh;
     margin-top: calc(100vh - 85vh - 20px);
     background: #6A040F;
@@ -23,7 +23,7 @@
   }
    
   .close-icon {
-    content: 'x';
+    /*content: 'x';
     cursor: pointer;
     position: fixed;
     right: calc(15% - 30px);
@@ -35,5 +35,18 @@
     line-height: 20px;
     text-align: center;
     border: 1px solid #999;
-    font-size: 20px;
+    font-size: 20px;*/
+    width: 10%;
+    position: fixed;
+    right: calc(24% - 30px);
+    top: calc(100vh - 85vh - 33px);
+    background-color: #C4C4C4
+  }
+
+  .close-icon:hover {
+    background-color: #C4C4C4;
+  }
+
+  .add-popup {
+    margin-top: 5em;
   }

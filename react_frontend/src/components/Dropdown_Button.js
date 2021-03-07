@@ -32,7 +32,7 @@ const emoji_choose = e => {
     }
 }
 
-const Dropdown_Button = ({titleDrop, handleClick,  handleSelect}) => {
+const Dropdown_Button = ({titleDrop, handleSelect}) => {
     return (
         <>
           <style type="text/css">

@@ -4,25 +4,48 @@ import SearchBar from './SearchBar'
 import Dropdown from './Dropdown_Button'
 import Results from './Results'
 
+const emoji = require("emoji-dictionary")
+
+const emoji_choose = e => {
+    if (e === "waiting") {
+        return emoji.getUnicode(":seedling:")+" "
+    }
+    else if(e === "coding") {
+        return emoji.getUnicode(":computer:")+" "
+    }
+    else if(e === "interview") {
+        return emoji.getUnicode(":calendar:")+" "
+    }
+    else if(e === "offer") {
+        return emoji.getUnicode(":page_facing_up:")+" "
+    }
+    else if(e === "rejected") {
+        return emoji.getUnicode(":x:")+" "
+    }
+
+    else {
+        return emoji.getUnicode(":leopard:")+" "
+    }
+}
 
 const drop_choose = e => {
     if (e === "waiting") {
-        return "Waiting to hear back"
+        return emoji_choose(e)+ " " +"Waiting to hear back"
     }
     else if(e === "coding") {
-        return "Coding Challenge"
+        return emoji_choose(e)+ " " +"Coding Challenge"
     }
     else if(e === "interview") {
-        return "Interview"
+        return emoji_choose(e)+ " " +"Interview"
     }
     else if(e === "offer") {
-        return "Offer"
+        return emoji_choose(e)+ " " +"Offer"
     }
     else if(e === "rejected") {
-        return "Rejected"
+        return emoji_choose(e)+ " " +"Rejected"
     }
     else {
-        return "Nyet"
+        return emoji_choose(e)+ " " +"Nyet"
     }
 }
 
@@ -92,14 +115,12 @@ function Home() {
             setFilterDisplay(cards)
         }
     }
-    const handleTitleDrop = e => {
-    }
 
     return (
         <div>
             {/* filter dropdown thing here too */}
             <div className="filter">
-                <Dropdown titleDrop={titleDrop} handleClick={handleTitleDrop} value={selectedOption} handleSelect={handleDropdownChange}/>
+                <Dropdown titleDrop={titleDrop}  value={selectedOption} handleSelect={handleDropdownChange}/>
             </div>
             <div className="searchbox">
             <SearchBar value={query} handleChange={e =>handleChange(e.target.value)} />

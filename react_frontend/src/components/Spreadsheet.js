@@ -61,6 +61,10 @@ class Spreadsheet extends React.Component {
       paddingTop: "10px",
       "font-family": "Montserrat",
     };
+    const style_add_button = {
+      "font-family": "Montserrat",
+      "border-color": "red"
+    }
 
     const togglePopup = () => {
       this.setState({ isOpen: !this.state.isOpen });
@@ -76,7 +80,7 @@ class Spreadsheet extends React.Component {
         <div>
           <input
             className="Add-Button"
-            bsPrefix="super-colors"
+            style={style_add_button}
             type="button"
             value="Add"
             onClick={togglePopup}
@@ -93,7 +97,6 @@ class Spreadsheet extends React.Component {
                     <input type="text" placeholder="Enter Company Name" />
                   </div>
                   <div className="Current-Stage-Of-Process">
-                    {/* <Dropdown titleDrop="Current Stage of Process" /> */}
                     <Dropdown titleDrop={this.state.titleDrop}  value={this.state.selectedOption} handleSelect={handleDropdownChange}/>
                   </div>
                   <div className="Additional-Information-box">

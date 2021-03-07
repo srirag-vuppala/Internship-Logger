@@ -72,7 +72,6 @@ const Dropdown_Button = ({titleDrop, handleSelect}) => {
               <Dropdown.Item eventKey="offer">{emoji_choose("offer")}Offer</Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item eventKey="rejected">{emoji_choose("rejected")}Rejected</Dropdown.Item>
-              {/* <Dropdown.Item eventKey="rejected" as="button"><div onClick={(e) => this.changeValue(e.target.textContent)}>Item #1</div></Dropdown.Item> */}
           </DropdownButton>
         </>
     )  

@@ -6,7 +6,7 @@ class Form extends Component {
         bye bi
         job: '',
     }
-    state = this.initialState
+    state = this.initialStateh
     
     handleChange = event => {
         const { name, value } = event.target

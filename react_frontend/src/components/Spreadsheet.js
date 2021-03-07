@@ -22,6 +22,27 @@ const emoji_choose = (e) => {
   }
 };
 
+const drop_choose = (e) => {
+    if (e === "waiting") {
+        return emoji_choose(e)+ " " +"Waiting to hear back"
+    }
+    else if(e === "coding") {
+        return emoji_choose(e)+ " " +"Coding Challenge"
+    }
+    else if(e === "interview") {
+        return emoji_choose(e)+ " " +"Interview"
+    }
+    else if(e === "offer") {
+        return emoji_choose(e)+ " " +"Offer"
+    }
+    else if(e === "rejected") {
+        return emoji_choose(e)+ " " +"Rejected"
+    }
+    else {
+        return emoji_choose(e)+ " " +"Nyet"
+    }
+}
+
 /*
  * The Spreadsheet React component
  */
@@ -30,6 +51,8 @@ class Spreadsheet extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
+      titleDrop: 'Current Stage of Process',
+      selectedOption: '',
     };
   }
   render() {
@@ -43,9 +66,13 @@ class Spreadsheet extends React.Component {
       this.setState({ isOpen: !this.state.isOpen });
     };
 
+    const handleDropdownChange = (e) => {
+      this.setState({titleDrop: drop_choose(e)});
+    }
+
     return (
       <div style={style}>
-		<div><SpreadsheetBoard /></div>
+		  <div><SpreadsheetBoard /></div>
         <div>
           <input
             className="Add-Button"
@@ -66,7 +93,8 @@ class Spreadsheet extends React.Component {
                     <input type="text" placeholder="Enter Company Name" />
                   </div>
                   <div className="Current-Stage-Of-Process">
-                    <Dropdown FilterType="Current Stage of Process" />
+                    {/* <Dropdown titleDrop="Current Stage of Process" /> */}
+                    <Dropdown titleDrop={this.state.titleDrop}  value={this.state.selectedOption} handleSelect={handleDropdownChange}/>
                   </div>
                   <div className="Additional-Information-box">
                     <input type="text" placeholder="Additional Information" />

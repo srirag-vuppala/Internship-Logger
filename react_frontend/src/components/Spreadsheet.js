@@ -75,6 +75,9 @@ class Spreadsheet extends React.Component {
 			placeholder="Enter Company Name"
 			/>
 		</div>
+		<div className="Current-Stage-Of-Process">
+			<Dropdown/>
+		</div>
 		<div className="Additional-Information-box">
 			<input
 			type="text"

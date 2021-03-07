@@ -1,46 +1,38 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 
-// function Spreadsheet(){
-//     return (
-//         <div>
-//             <p>hey there</p>
-//         </div>
-//     )
-// }
 
 const emoji = require("emoji-dictionary")
 
 const emoji_choose = e => {
-    if (e === 1) {
+    if (e === "waiting") {
         return emoji.getUnicode(":seedling:")+" "
     }
-    else if(e === 2) {
+    else if(e === "coding") {
         return emoji.getUnicode(":computer:")+" "
     }
-    else if(e === 3) {
+    else if(e === "interview") {
         return emoji.getUnicode(":calendar:")+" "
     }
-    else if(e === 4) {
+    else if(e === "offer") {
         return emoji.getUnicode(":page_facing_up:")+" "
     }
-    else if(e === 5) {
+    else if(e === "rejected") {
         return emoji.getUnicode(":x:")+" "
     }
-
     else {
         return emoji.getUnicode(":leopard:")+" "
     }
 }
 
 /*
- * The Kanban React component
+ * The Spreadsheet React component
  */
 class Spreadsheet extends React.Component {
 	render(){
 		const style = {
 			'padding': '30px',
-			'paddingTop': '5px',
+			'paddingTop': '10px',
 			'font-family': 'Montserrat'
 		};
     
@@ -61,16 +53,16 @@ class SpreadsheetBoard extends React.Component {
 		this.state = ({
 			isLoading: true,
 			jobs: [],
-			draggedOverCol: 0,
+			draggedOverCol: '',
 		});
 		this.handleOnDragEnter = this.handleOnDragEnter.bind(this);
 		this.handleOnDragEnd = this.handleOnDragEnd.bind(this);
 		this.columns = [
-			{name: 'Waiting To Hear Back', stage: 1},
-			{name: 'Coding Challenge', stage: 2},
-			{name: 'Interview', stage: 3},
-			{name: 'Offer', stage: 4},
-			{name: 'Rejected', stage: 5},
+			{company: 'Waiting To Hear Back', status: 'waiting'},
+			{company: 'Coding Challenge', status: 'coding'},
+			{company: 'Interview', status: 'interview'},
+			{company: 'Offer', status: 'offer'},
+			{company: 'Rejected', status: 'rejected'},
 		];
 	}
 
@@ -79,15 +71,18 @@ class SpreadsheetBoard extends React.Component {
 	}
 
 	//this is called when a Kanban card is dragged over a column (called by column)
-	handleOnDragEnter(e, stageValue) {
-		this.setState({ draggedOverCol: stageValue });
+	handleOnDragEnter(e, statusValue) {
+		this.setState({ draggedOverCol: statusValue });
 	}
 
 	//this is called when a Kanban card dropped over a column (called by card)
 	handleOnDragEnd(e, job) {
 		const updatedJobs = this.state.jobs.slice(0);
-		updatedJobs.find((jobObject) => {return jobObject.name === job.name;}).job_stage = this.state.draggedOverCol;
+		updatedJobs.find((jobObject) => {return jobObject.company === job.company && jobObject.position === job.position;}).status = this.state.draggedOverCol;
 		this.setState({ jobs: updatedJobs });
+		console.log(this.state.jobs)
+		// We'll probably need to do some axios bs to update the backend with the changed status
+
 	}
 
 	render() {
@@ -100,12 +95,12 @@ class SpreadsheetBoard extends React.Component {
 				{this.columns.map((column) => {
 					return (
 						<SpreadsheetColumn
-							name={ column.name }
-							stage={ column.stage }
-							jobs={ this.state.jobs.filter((job) => {return parseInt(job.job_stage, 10) === column.stage;}) }
+							company={ column.company}
+							status={ column.status }
+							jobs={ this.state.jobs.filter((job) => {return job.status === column.status;}) }
 							onDragEnter={ this.handleOnDragEnter }
 							onDragEnd={ this.handleOnDragEnd }
-							key={ column.stage }
+							key={ column.status }
 						/>
 					);
 				})}
@@ -132,7 +127,7 @@ class SpreadsheetColumn extends React.Component {
 			return (
 				<SpreadsheetCard
 					job={job}
-					key={job.name}
+					key={job.company}
 					onDragEnd={this.props.onDragEnd}
 				/>
 			);
@@ -159,7 +154,7 @@ class SpreadsheetColumn extends React.Component {
 		return  (
       <div
 				style={columnStyle}
-				onDragEnter={(e) => {this.setState({ mouseIsHovering: true }); this.props.onDragEnter(e, this.props.stage);}}
+				onDragEnter={(e) => {this.setState({ mouseIsHovering: true }); this.props.onDragEnter(e, this.props.status);}}
 				onDragExit={(e) => {this.setState({ mouseIsHovering: false });}}
 			>
 				<h5 style={{
@@ -167,7 +162,7 @@ class SpreadsheetColumn extends React.Component {
 							'color':'white',
 							'border-radius': '5px',
     						'box-shadow': '0 4px 10px rgba(235, 0, 0, .50)',  
-						    'font-family':'Montserrat'}}>{emoji_choose(this.props.stage)}{this.props.name} ({this.props.jobs.length})</h5>
+						    'font-family':'Montserrat'}}>{emoji_choose(this.props.status)}{this.props.company} ({this.props.jobs.length})</h5>
 				{this.generateSpreadsheetCards()}
 				<br/>
       </div>);
@@ -207,8 +202,7 @@ class SpreadsheetCard extends React.Component {
 				border="danger"
 				onDragEnd={(e) => {this.props.onDragEnd(e, this.props.job);}}
 			>
-				{/* <div><h4>{this.props.project.name}</h4></div> */}
-				<Card.Header>{this.props.job.name}</Card.Header>
+				<Card.Header>{this.props.job.company}</Card.Header>
 				<Card.Body
 					style={{'width': '100%' ,
 						    'height': '60%',
@@ -221,7 +215,7 @@ class SpreadsheetCard extends React.Component {
 				>
 				{(this.state.collapsed)
 					? null
-					: (<div><strong>Position: </strong>{ this.props.job.position }<br/></div>)
+					: (<div><strong>Position: </strong>{ this.props.job.position }<br/><strong>Info: </strong>{ this.props.job.additional_info}</div>)
 				}
 
 
@@ -233,59 +227,23 @@ class SpreadsheetCard extends React.Component {
 }
 
 /*
- * Projects to be displayed on Kanban Board
+ * Projects to be displayed on Scrum Board
  */
 let jobList = [
-  {
-    name: 'Google',
-    position: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
-    job_stage: 1
-  },
-  {
-    name: 'Jupyter',
-    position : 'SWE ',
-    job_stage: 1
-  },
-  {
-    name: 'Job - 3',
-    position : 'SWE ',
-    job_stage: 1
-  },
-  {
-    name: 'Job - 4',
-    position: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam posuere dui vel urna egestas rutrum. ',
-    job_stage: 2
-  },
-  {
-    name: 'Job - 5',
-    position : 'SWE ',
-    job_stage: 3
-  },
-  {
-    name: 'Job - 6',
-    position : 'SWE ',
-    job_stage: 3
-  },
-  {
-    name: 'Job - 7',
-    position : 'SWE ',
-    job_stage: 4
-  },
-
-	    // { company: "google", position: "SWE", status: "waiting"},
-        // { company: "google", position: "Data Analyst", status: "interview"},
-        // { company: "facebook", position: "SWE", status:"coding"},
-        // { company: "apple", position: "SWE", status: "waiting"},
-        // { company: "jupyter", position: "SWE", status:"coding"},
-        // { company: "cal poly", position: "SWE", status:"interview"},
-        // { company: "dodgers", position: "SWE", status:"coding"},
-        // { company: "giants", position: "SWE", status:"rejected"},
-        // { company: "red sox", position: "SWE", status:"coding"},
-        // { company: "jupyter", position: "tpm", status:"offer"},
-        // { company: "yahoo", position: "SWE", status:"interview"},
-        // { company: "qk", position: "SWE", status:"waiting"},
-        // { company: "nasdaq", position: "data entry intern", status:"offer"},
-        // { company: "reddit", position: "manager", status:"coding"
+	    { company: "google", position: "SWE", status: "waiting", additional_info: "mish"},
+        { company: "google", position: "Data Analyst", status: "interview", additional_info: "mish"},
+        { company: "facebook", position: "SWE", status:"coding", additional_info: "mish"},
+        { company: "apple", position: "SWE", status: "waiting", additional_info: "mish"},
+        { company: "jupyter", position: "SWE", status:"coding", additional_info: "mish"},
+        { company: "cal poly", position: "SWE", status:"interview", additional_info: "mish"},
+        { company: "dodgers", position: "SWE", status:"coding", additional_info: "mish"},
+        { company: "giants", position: "SWE", status:"rejected", additional_info: "mish"},
+        { company: "red sox", position: "SWE", status:"coding", additional_info: "mish"},
+        { company: "jupyter", position: "tpm", status:"offer", additional_info: "mish"},
+        { company: "yahoo", position: "SWE", status:"interview", additional_info: "mish"},
+        { company: "qk", position: "SWE", status:"waiting", additional_info: "mish"},
+        { company: "nasdaq", position: "data entry intern", status:"offer", additional_info: "mish"},
+        { company: "reddit", position: "manager", status:"coding", additional_info: "mish"}
 ];
 
 export default Spreadsheet 

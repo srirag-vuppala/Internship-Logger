@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.com/srirag-vuppala/Internship-Logger.svg?branch=main)](https://travis-ci.com/srirag-vuppala/Internship-Logger)
 # Internship-Logger
-CSC 307 Project 
+CSC 307 Project | [Wiki Page](https://github.com/srirag-vuppala/Internship-Logger/wiki)  
 
 Time Log Link:
 ---
 https://docs.google.com/spreadsheets/d/1lA9IDxMlvwn2KnbLBLqlZPUooWh7hr3ekhfCKxlAwmg/edit?usp=sharing
 
-UI Prototpe:
+UI Prototype:
 ---
 Last Updated: March 1, 2021  
 https://www.figma.com/file/BtVrbVMiazxniE5FzXodcy/Internship-Log?node-id=19%3A0

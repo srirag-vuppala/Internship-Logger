@@ -6,6 +6,10 @@ Time Log Link:
 ---
 https://docs.google.com/spreadsheets/d/1lA9IDxMlvwn2KnbLBLqlZPUooWh7hr3ekhfCKxlAwmg/edit?usp=sharing
 
+UI Prototpe:
+---
+https://www.figma.com/file/BtVrbVMiazxniE5FzXodcy/Internship-Log?node-id=19%3A0
+
 Code Style:
 ---
 Python backend:

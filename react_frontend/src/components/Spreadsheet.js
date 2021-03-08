@@ -9,19 +9,40 @@ const emoji = require("emoji-dictionary");
 
 const emoji_choose = (e) => {
   if (e === "waiting") {
-    return emoji.getUnicode(":seedling:") + " ";
+    return emoji.getUnicode(":seedling:");
   } else if (e === "coding") {
-    return emoji.getUnicode(":computer:") + " ";
+    return emoji.getUnicode(":computer:");
   } else if (e === "interview") {
-    return emoji.getUnicode(":calendar:") + " ";
+    return emoji.getUnicode(":calendar:");
   } else if (e === "offer") {
-    return emoji.getUnicode(":page_facing_up:") + " ";
+    return emoji.getUnicode(":page_facing_up:");
   } else if (e === "rejected") {
-    return emoji.getUnicode(":x:") + " ";
+    return emoji.getUnicode(":x:");
   } else {
-    return emoji.getUnicode(":leopard:") + " ";
+    return emoji.getUnicode(":leopard:");
   }
 };
+
+// const rev_drop_choose = (e) => {
+//     if (e === emoji.getUnicode(":seedling:") + " " +"Waiting to hear back") {
+//         return "waiting"
+//     }
+//     else if (e === emoji.getUnicode(":computer:") + " " +"Coding Challenge") {
+//         return "coding"
+//     }
+//     else if (e === emoji.getUnicode(":calendar:") + " " +"Interview") {
+//         return "interview"
+//     }
+//     else if (e === emoji.getUnicode(":page_facing_up:") + " " +"Offer") {
+//         return "offer"
+//     }
+//     else if (e === emoji.getUnicode(":x:") + " " +"Rejected") {
+//         return "rejected"
+//     }
+//     else {
+//         return "Nyet"
+//     }
+// }
 
 const drop_choose = (e) => {
     if (e === "waiting") {
@@ -44,27 +65,6 @@ const drop_choose = (e) => {
     }
 }
 
-// let jobList = axios.get('http://localhost:5000/spreadsheet').then(res => { return res.data.job_list});
-
-
-
-
-// function getBackendInfo() {
-//   axios.get('http://localhost:5000/spreadsheet')
-//   .then(res => {
-//     return res.data.job_list;
-//     // jobList = res.data.job_list;
-//     // console.log(jobList);
-//   })
-//   .catch(function (error) {
-//   console.log(error);
-//   });
-// }; 
-
-// jobList = getBackendInfo();
-
-// console.log(jobList);
-
 /*
  * The Spreadsheet React component
  */
@@ -75,9 +75,23 @@ class Spreadsheet extends React.Component {
       isOpen: false,
       titleDrop: 'Current Stage of Process',
       selectedOption: '',
-      
-      // jobList: [],
+      position: '',
+      company: '',
+      info: '',
+      submitted: false,
     };
+  }
+
+  makePostCall(c) {
+    return axios.post('http://localhost:5000/spreadsheet', c)
+    .then(function (response) {
+      console.log(response);
+      return (response) // return status 201 - created
+    })
+    .catch(function (error) {
+      console.log(error);
+      return false;
+    });
   }
   render() {
     const style = {
@@ -96,8 +110,35 @@ class Spreadsheet extends React.Component {
 
     const handleDropdownChange = (e) => {
       this.setState({titleDrop: drop_choose(e)});
+      this.setState({selectedOption: e})
     }
-
+    
+    const handlePositionChange = (e) => {
+      this.setState({position: e.target.value});
+    }
+    const handleCompanyChange = (e) => {
+      this.setState({company: e.target.value});
+    }
+    const handleInfoChange = (e) => {
+      this.setState({info: e.target.value});
+    }
+    const handleSubmittedChange = () => {
+      console.log(this.state.selectedOption);
+      let js = {
+        position: this.state.position,
+        company: this.state.company,
+        additional_info: this.state.info,
+        status: this.state.selectedOption,
+      }
+      this.setState({submitted: !this.state.submitted});
+      this.setState({ isOpen: !this.state.isOpen });
+      this.makePostCall(js).then( callResult => {
+        // if (callResult.status === 201) { // this will now be the actual response rather than the status
+        //   this.setState({ characters: [...this.state.characters, callResult.data] });
+        // }
+      });
+    } 
+  
     return (
       <div style={style}>
 		  <div><SpreadsheetBoard /></div>
@@ -115,18 +156,18 @@ class Spreadsheet extends React.Component {
               content={
                 <>
                   <div className="Enter-Position-box">
-                    <input type="text" placeholder="Enter Position" />
+                    <input type="text" placeholder="Enter Position" value={this.state.position} onChange={handlePositionChange} />
                   </div>
                   <div className="Enter-Company-Name-box">
-                    <input type="text" placeholder="Enter Company Name" />
+                    <input type="text" placeholder="Enter Company Name" value={this.state.company} onChange={handleCompanyChange} />
                   </div>
                   <div className="Current-Stage-Of-Process">
                     <Dropdown titleDrop={this.state.titleDrop}  value={this.state.selectedOption} handleSelect={handleDropdownChange}/>
                   </div>
                   <div className="Additional-Information-box">
-                    <input type="text" placeholder="Additional Information" />
-                  </div>
-                  <button className="Submit-Position" bsPrefix="super-colors">
+                    <input type="text" placeholder="Additional Information"  value={this.state.info} onChange={handleInfoChange}/>
+                  </div> 
+                  <button className="Submit-Position" onClick={handleSubmittedChange}>
                     Submit Position
                   </button>
                 </>
@@ -162,17 +203,6 @@ class SpreadsheetBoard extends React.Component {
     ];
   }
 
-  // function getBackendInfo() {
-  //   axios.get('http://localhost:5000/spreadsheet')
-  //   .then(res => {
-  //     return res.data.job_list;
-  //   // jobList = res.data.job_list;
-  //   // console.log(jobList);
-  //   })
-  //   .catch(function (error) {
-  //   console.log(error);
-  //   });
-  // }; 
 
   componentDidMount() {
     // this.setState({ jobs: getBackendInfo(), isLoading: false });
@@ -372,120 +402,5 @@ class SpreadsheetCard extends React.Component {
   }
 }
 
-// const getBackendInfo = () => {
-//   axios.get('http://localhost:5000/')
-//   .then(res => {
-//     this.setState({});
-//       setCards(res.data.job_list);
-//     this.setState({ characters });
-//     console.log(characters);
-//     return characters;
-//     return cardss
-// })
-// .catch(function (error) {
-//   console.log(error);
-//   });
-// };
-
-// function getBackendInfo() {
-//   axios.get('http://localhost:5000/users')
-//   .then(res => {
-//     const cards = res.data.job_list;
-//     console.log(cards);
-//     return cards;
-//   })
-//   .catch(function (error) {
-//   console.log(error);
-//   });
-// }; 
-/*
- * Projects to be displayed on Scrum Board
- */
-// let jobList = [
-//   {
-//     company: "google",
-//     position: "SWE",
-//     status: "waiting",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "google",
-//     position: "Data Analyst",
-//     status: "interview",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "facebook",
-//     position: "SWE",
-//     status: "coding",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "apple",
-//     position: "SWE",
-//     status: "waiting",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "jupyter",
-//     position: "SWE",
-//     status: "coding",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "cal poly",
-//     position: "SWE",
-//     status: "interview",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "dodgers",
-//     position: "SWE",
-//     status: "coding",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "giants",
-//     position: "SWE",
-//     status: "rejected",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "red sox",
-//     position: "SWE",
-//     status: "coding",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "jupyter",
-//     position: "tpm",
-//     status: "offer",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "yahoo",
-//     position: "SWE",
-//     status: "interview",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "qk",
-//     position: "SWE",
-//     status: "waiting",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "nasdaq",
-//     position: "data entry intern",
-//     status: "offer",
-//     additional_info: "mish",
-//   },
-//   {
-//     company: "reddit",
-//     position: "manager",
-//     status: "coding",
-//     additional_info: "mish",
-//   },
-// ];
 
 export default Spreadsheet;

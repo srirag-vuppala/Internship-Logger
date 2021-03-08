@@ -51,7 +51,7 @@ def deleteJob():
 def spreadsheet():
    if request.method == 'POST':
       print("went to theee post")
-      return jobToAdd()
+      return addJob()
 
    elif request.method == 'GET':
       print("made it into GET 2")

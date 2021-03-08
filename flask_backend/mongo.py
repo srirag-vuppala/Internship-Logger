@@ -29,8 +29,7 @@ class Model(dict):
 
     def remove(self):
         if self._id:
-            print("curr id: " + str(self._id))
-            print("curr company: " + str(self.company))
+            print("made it to mongo bich")
             resp = self.collection.remove({"_id": ObjectId(self._id)})
             self.clear()
             return resp
@@ -38,6 +37,7 @@ class Model(dict):
 class Job(Model):
     db_client = pymongo.MongoClient('localhost', 27017)
     collection = db_client["jobs"]["job_list"]
+
 
     def find_all(self):
         jobs = list(self.collection.find())

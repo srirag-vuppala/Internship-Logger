@@ -23,27 +23,6 @@ const emoji_choose = (e) => {
   }
 };
 
-// const rev_drop_choose = (e) => {
-//     if (e === emoji.getUnicode(":seedling:") + " " +"Waiting to hear back") {
-//         return "waiting"
-//     }
-//     else if (e === emoji.getUnicode(":computer:") + " " +"Coding Challenge") {
-//         return "coding"
-//     }
-//     else if (e === emoji.getUnicode(":calendar:") + " " +"Interview") {
-//         return "interview"
-//     }
-//     else if (e === emoji.getUnicode(":page_facing_up:") + " " +"Offer") {
-//         return "offer"
-//     }
-//     else if (e === emoji.getUnicode(":x:") + " " +"Rejected") {
-//         return "rejected"
-//     }
-//     else {
-//         return "Nyet"
-//     }
-// }
-
 const drop_choose = (e) => {
     if (e === "waiting") {
         return emoji_choose(e)+ " " +"Waiting to hear back"
@@ -133,15 +112,17 @@ class Spreadsheet extends React.Component {
       this.setState({submitted: !this.state.submitted});
       this.setState({ isOpen: !this.state.isOpen });
       this.makePostCall(js).then( callResult => {
-        // if (callResult.status === 201) { // this will now be the actual response rather than the status
-        //   this.setState({ characters: [...this.state.characters, callResult.data] });
-        // }
+        // this.setState({ state:this.state})
+        if (callResult.status === 201) { // this will now be the actual response rather than the status
+          window.location.reload();
+          // for later
+        }
       });
     } 
   
     return (
       <div style={style}>
-		  <div><SpreadsheetBoard /></div>
+		    <div><SpreadsheetBoard /></div>
         <div>
           <input
             className="Add-Button"
@@ -204,6 +185,7 @@ class SpreadsheetBoard extends React.Component {
   }
 
 
+  // render the jobs on the board
   componentDidMount() {
     // this.setState({ jobs: getBackendInfo(), isLoading: false });
     axios.get('http://localhost:5000/spreadsheet')
@@ -215,6 +197,30 @@ class SpreadsheetBoard extends React.Component {
     });
   }
 
+  makeDeleteCall(c) {
+    return axios.delete('http://localhost:5000/spreadsheet/'+ c)
+    .then(function (response) {
+      console.log(response);
+      return (response) // return status 201 - created
+    })
+    .catch(function (error) {
+      console.log(error);
+      return false;
+    });
+  }
+
+  makePostCall(c) {
+    return axios.post('http://localhost:5000/spreadsheet', c)
+    .then(function (response) {
+      console.log(response);
+      return (response) // return status 201 - created
+    })
+    .catch(function (error) {
+      console.log(error);
+      return false;
+    });
+  }
+
   //this is called when a Kanban card is dragged over a column (called by column)
   handleOnDragEnter(e, statusValue) {
     this.setState({ draggedOverCol: statusValue });
@@ -223,6 +229,34 @@ class SpreadsheetBoard extends React.Component {
   //this is called when a Kanban card dropped over a column (called by card)
   handleOnDragEnd(e, job) {
     const updatedJobs = this.state.jobs.slice(0);
+
+    let item_to_delete = updatedJobs.find((jobObject) => {
+      return (
+        jobObject.company === job.company && jobObject.position === job.position
+      );
+    });
+
+    let pos_del = item_to_delete.position;
+    let comp_del = item_to_delete.company;
+    let info_del = item_to_delete.additional_info;
+    let status_del = this.state.draggedOverCol;
+
+    //delete 
+    this.makeDeleteCall(item_to_delete._id);
+
+    // Then add with the right column location thing
+    let js = {
+        position: pos_del,
+        company: comp_del,
+        additional_info: info_del,
+        status: status_del,
+      }
+      this.makePostCall(js).then( callResult => {
+        if (callResult.status === 201) { // this will now be the actual response rather than the status
+          window.location.reload();
+        }
+    });
+
     updatedJobs.find((jobObject) => {
       return (
         jobObject.company === job.company && jobObject.position === job.position
@@ -230,9 +264,6 @@ class SpreadsheetBoard extends React.Component {
     }).status = this.state.draggedOverCol;
     this.setState({ jobs: updatedJobs });
     console.log(this.state.jobs);
-    // We'll probably need to do some axios bs to update the backend with the changed status
-
-
   }
 
   render() {
@@ -343,7 +374,30 @@ class SpreadsheetCard extends React.Component {
     super(props);
     this.state = {
       collapsed: true,
+      data: []
     };
+  }
+  componentDidMount() {
+    // this.setState({ jobs: getBackendInfo(), isLoading: false });
+    axios.get('http://localhost:5000/spreadsheet')
+    .then(res => {
+      this.setState({data: res.data.job_list});
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+  }
+
+ makeDeleteCall(c) {
+    return axios.delete('http://localhost:5000/spreadsheet/'+ c)
+    .then(function (response) {
+      console.log(response);
+      return (response) // return status 204 - created
+    })
+    .catch(function (error) {
+      console.log(error);
+      return false;
+    });
   }
 
   render() {
@@ -359,7 +413,16 @@ class SpreadsheetCard extends React.Component {
       "box-shadow": "0 4px 12px rgba(235, 0, 0, .60)",
       "border-radius": "13px",
     };
-
+    const handleChange = (e) => {
+      console.log(this.props.job._id);
+      this.makeDeleteCall(this.props.job._id).then( callResult => {
+        if (callResult.status === 204) { // this will now be the actual response rather than the status
+          console.log("hihih")
+          // for later
+          window.location.reload();
+        }
+      });
+    }
     return (
       <Card
         style={cardStyle}
@@ -370,7 +433,9 @@ class SpreadsheetCard extends React.Component {
           this.props.onDragEnd(e, this.props.job);
         }}
       >
-        <Card.Header>{this.props.job.company}</Card.Header>
+        <Card.Header>
+          {this.props.job.company}
+        </Card.Header>
         <Card.Body
           style={{
             width: "100%",
@@ -390,6 +455,10 @@ class SpreadsheetCard extends React.Component {
               <br />
               <strong>Info: </strong>
               {this.props.job.additional_info}
+              <br />
+              <strong>Delete</strong>
+              <button onClick={handleChange}>Delete</button>
+              <br />
             </div>
           )}
 

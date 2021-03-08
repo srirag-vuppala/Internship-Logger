@@ -58,9 +58,24 @@ def spreadsheet():
       jobs = Job().find_all()
       return {"job_list": jobs} 
    elif request.method == 'DELETE':
+      print(request.get_json())
+      print("made it to delete bich")
       return deleteJob()
    return "sad"
       
+@app.route('/spreadsheet/<id>', methods=['DELETE'])
+
+def get_job(id):
+   if request.method == 'DELETE':
+      job = Job({"_id":id})
+      resp = job.remove()
+      print(f'resp = {resp}')
+   if resp['n'] == 1:
+      return {}, 204
+   #if user.reload() :
+   # return user
+   else :
+      return jsonify({"error": "User not found"}), 404 
 
 
 @app.route('/', methods=['GET','DELETE', 'POST'])

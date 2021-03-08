@@ -58,20 +58,9 @@ class Spreadsheet extends React.Component {
       company: '',
       info: '',
       submitted: false,
-      allJobs: []
     };
   }
 
-  componentDidMount() {
-    // this.setState({ jobs: getBackendInfo(), isLoading: false });
-    axios.get('http://localhost:5000/spreadsheet')
-    .then(res => {
-      this.setState({allJobs: res.data.job_list});
-    })
-    .catch(function (error) {
-    console.log(error);
-    });
-  }
   makePostCall(c) {
     return axios.post('http://localhost:5000/spreadsheet', c)
     .then(function (response) {
@@ -123,9 +112,11 @@ class Spreadsheet extends React.Component {
       this.setState({submitted: !this.state.submitted});
       this.setState({ isOpen: !this.state.isOpen });
       this.makePostCall(js).then( callResult => {
-        // if (callResult.status === 201) { // this will now be the actual response rather than the status
-        //   this.setState({ characters: [...this.state.characters, callResult.data] });
-        // }
+        // this.setState({ state:this.state})
+        if (callResult.status === 201) { // this will now be the actual response rather than the status
+          window.location.reload();
+          // for later
+        }
       });
     } 
   
@@ -261,9 +252,9 @@ class SpreadsheetBoard extends React.Component {
         status: status_del,
       }
       this.makePostCall(js).then( callResult => {
-        // if (callResult.status === 201) { // this will now be the actual response rather than the status
-        //   this.setState({ characters: [...this.state.characters, callResult.data] });
-        // }
+        if (callResult.status === 201) { // this will now be the actual response rather than the status
+          window.location.reload();
+        }
     });
 
     updatedJobs.find((jobObject) => {
@@ -396,19 +387,12 @@ class SpreadsheetCard extends React.Component {
     console.log(error);
     });
   }
-  // shorter & readable 
-  // delete(item){
-  //   // make axios call for delete here
-  //   const data = this.state.data.filter(i => i._id === item._id)
-  //   this.setState({data})
-  //   this.makeDeleteCall(item._id)
-  //   console.log(item._id)
-  // }
+
  makeDeleteCall(c) {
     return axios.delete('http://localhost:5000/spreadsheet/'+ c)
     .then(function (response) {
       console.log(response);
-      return (response) // return status 201 - created
+      return (response) // return status 204 - created
     })
     .catch(function (error) {
       console.log(error);
@@ -429,12 +413,16 @@ class SpreadsheetCard extends React.Component {
       "box-shadow": "0 4px 12px rgba(235, 0, 0, .60)",
       "border-radius": "13px",
     };
-    // const listItem = this.state.data.map((item)=>{
-    //           return <div key={item._id}>
-    //                   <button onClick={this.delete.bind(this, item)}>Delete</button>
-    //                 </div>
-    //               });
-
+    const handleChange = (e) => {
+      console.log(this.props.job._id);
+      this.makeDeleteCall(this.props.job._id).then( callResult => {
+        if (callResult.status === 204) { // this will now be the actual response rather than the status
+          console.log("hihih")
+          // for later
+          window.location.reload();
+        }
+      });
+    }
     return (
       <Card
         style={cardStyle}
@@ -469,7 +457,7 @@ class SpreadsheetCard extends React.Component {
               {this.props.job.additional_info}
               <br />
               <strong>Delete</strong>
-              <button onClick={(e) => {this.makeDeleteCall(this.props.job._id)}}>Delete</button>
+              <button onClick={handleChange}>Delete</button>
               <br />
             </div>
           )}

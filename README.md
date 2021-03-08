@@ -10,6 +10,12 @@ UI Prototpe:
 ---
 https://www.figma.com/file/BtVrbVMiazxniE5FzXodcy/Internship-Log?node-id=19%3A0
 
+Dev Enviroment Set Up:
+---
+Install npm: https://nodejs.org/en/download/
+MongoDB: https://docs.mongodb.com/manual/installation/
+Python: https://www.python.org/downloads/
+
 Code Style:
 ---
 Python backend:

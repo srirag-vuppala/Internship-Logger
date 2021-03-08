@@ -3,6 +3,7 @@ import "../assets/Spreadsheet.css";
 import Card from "react-bootstrap/Card";
 import Popup from "./Popup";
 import Dropdown from "./Dropdown_Button";
+import axios from "axios";
 
 const emoji = require("emoji-dictionary");
 
@@ -43,6 +44,27 @@ const drop_choose = (e) => {
     }
 }
 
+// let jobList = axios.get('http://localhost:5000/spreadsheet').then(res => { return res.data.job_list});
+
+
+
+
+// function getBackendInfo() {
+//   axios.get('http://localhost:5000/spreadsheet')
+//   .then(res => {
+//     return res.data.job_list;
+//     // jobList = res.data.job_list;
+//     // console.log(jobList);
+//   })
+//   .catch(function (error) {
+//   console.log(error);
+//   });
+// }; 
+
+// jobList = getBackendInfo();
+
+// console.log(jobList);
+
 /*
  * The Spreadsheet React component
  */
@@ -53,6 +75,8 @@ class Spreadsheet extends React.Component {
       isOpen: false,
       titleDrop: 'Current Stage of Process',
       selectedOption: '',
+      
+      // jobList: [],
     };
   }
   render() {
@@ -138,8 +162,27 @@ class SpreadsheetBoard extends React.Component {
     ];
   }
 
+  // function getBackendInfo() {
+  //   axios.get('http://localhost:5000/spreadsheet')
+  //   .then(res => {
+  //     return res.data.job_list;
+  //   // jobList = res.data.job_list;
+  //   // console.log(jobList);
+  //   })
+  //   .catch(function (error) {
+  //   console.log(error);
+  //   });
+  // }; 
+
   componentDidMount() {
-    this.setState({ jobs: jobList, isLoading: false });
+    // this.setState({ jobs: getBackendInfo(), isLoading: false });
+    axios.get('http://localhost:5000/spreadsheet')
+    .then(res => {
+      this.setState({jobs: res.data.job_list, isLoading: false});
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
   }
 
   //this is called when a Kanban card is dragged over a column (called by column)
@@ -158,6 +201,8 @@ class SpreadsheetBoard extends React.Component {
     this.setState({ jobs: updatedJobs });
     console.log(this.state.jobs);
     // We'll probably need to do some axios bs to update the backend with the changed status
+
+
   }
 
   render() {
@@ -327,94 +372,120 @@ class SpreadsheetCard extends React.Component {
   }
 }
 
+// const getBackendInfo = () => {
+//   axios.get('http://localhost:5000/')
+//   .then(res => {
+//     this.setState({});
+//       setCards(res.data.job_list);
+//     this.setState({ characters });
+//     console.log(characters);
+//     return characters;
+//     return cardss
+// })
+// .catch(function (error) {
+//   console.log(error);
+//   });
+// };
+
+// function getBackendInfo() {
+//   axios.get('http://localhost:5000/users')
+//   .then(res => {
+//     const cards = res.data.job_list;
+//     console.log(cards);
+//     return cards;
+//   })
+//   .catch(function (error) {
+//   console.log(error);
+//   });
+// }; 
 /*
  * Projects to be displayed on Scrum Board
  */
-let jobList = [
-  {
-    company: "google",
-    position: "SWE",
-    status: "waiting",
-    additional_info: "mish",
-  },
-  {
-    company: "google",
-    position: "Data Analyst",
-    status: "interview",
-    additional_info: "mish",
-  },
-  {
-    company: "facebook",
-    position: "SWE",
-    status: "coding",
-    additional_info: "mish",
-  },
-  {
-    company: "apple",
-    position: "SWE",
-    status: "waiting",
-    additional_info: "mish",
-  },
-  {
-    company: "jupyter",
-    position: "SWE",
-    status: "coding",
-    additional_info: "mish",
-  },
-  {
-    company: "cal poly",
-    position: "SWE",
-    status: "interview",
-    additional_info: "mish",
-  },
-  {
-    company: "dodgers",
-    position: "SWE",
-    status: "coding",
-    additional_info: "mish",
-  },
-  {
-    company: "giants",
-    position: "SWE",
-    status: "rejected",
-    additional_info: "mish",
-  },
-  {
-    company: "red sox",
-    position: "SWE",
-    status: "coding",
-    additional_info: "mish",
-  },
-  {
-    company: "jupyter",
-    position: "tpm",
-    status: "offer",
-    additional_info: "mish",
-  },
-  {
-    company: "yahoo",
-    position: "SWE",
-    status: "interview",
-    additional_info: "mish",
-  },
-  {
-    company: "qk",
-    position: "SWE",
-    status: "waiting",
-    additional_info: "mish",
-  },
-  {
-    company: "nasdaq",
-    position: "data entry intern",
-    status: "offer",
-    additional_info: "mish",
-  },
-  {
-    company: "reddit",
-    position: "manager",
-    status: "coding",
-    additional_info: "mish",
-  },
-];
+// let jobList = [
+//   {
+//     company: "google",
+//     position: "SWE",
+//     status: "waiting",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "google",
+//     position: "Data Analyst",
+//     status: "interview",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "facebook",
+//     position: "SWE",
+//     status: "coding",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "apple",
+//     position: "SWE",
+//     status: "waiting",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "jupyter",
+//     position: "SWE",
+//     status: "coding",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "cal poly",
+//     position: "SWE",
+//     status: "interview",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "dodgers",
+//     position: "SWE",
+//     status: "coding",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "giants",
+//     position: "SWE",
+//     status: "rejected",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "red sox",
+//     position: "SWE",
+//     status: "coding",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "jupyter",
+//     position: "tpm",
+//     status: "offer",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "yahoo",
+//     position: "SWE",
+//     status: "interview",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "qk",
+//     position: "SWE",
+//     status: "waiting",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "nasdaq",
+//     position: "data entry intern",
+//     status: "offer",
+//     additional_info: "mish",
+//   },
+//   {
+//     company: "reddit",
+//     position: "manager",
+//     status: "coding",
+//     additional_info: "mish",
+//   },
+// ];
 
 export default Spreadsheet;

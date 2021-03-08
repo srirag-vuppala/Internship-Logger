@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.com/srirag-vuppala/Internship-Logger.svg?branch=main)](https://travis-ci.com/srirag-vuppala/Internship-Logger)
 # Internship-Logger
 CSC 307 Project | [Wiki Page](https://github.com/srirag-vuppala/Internship-Logger/wiki)  
+---
+At a time when recruiting season for software engineer internships is in full swing, it is critical to be able to keep track of every application you submit. The **Internship Logger** allows users to efficiently and productively store and view information about an application including the company name, position, the current stage of process, and any additional information. Should the user want to change the current stage of process of a certain application, the logger has the ability to let users easily drag one application from one stage of process column to another. Additionally, if an application is not relevant to the user anymore, the user can simply delete the application from the columns page.
 
 CI Web Page:
 ---

@@ -4,6 +4,50 @@ import SearchBar from './SearchBar'
 import Dropdown from './Dropdown_Button'
 import Results from './Results'
 
+const emoji = require("emoji-dictionary")
+
+const emoji_choose = e => {
+    if (e === "waiting") {
+        return emoji.getUnicode(":seedling:")+" "
+    }
+    else if(e === "coding") {
+        return emoji.getUnicode(":computer:")+" "
+    }
+    else if(e === "interview") {
+        return emoji.getUnicode(":calendar:")+" "
+    }
+    else if(e === "offer") {
+        return emoji.getUnicode(":page_facing_up:")+" "
+    }
+    else if(e === "rejected") {
+        return emoji.getUnicode(":x:")+" "
+    }
+
+    else {
+        return emoji.getUnicode(":leopard:")+" "
+    }
+}
+
+const drop_choose = e => {
+    if (e === "waiting") {
+        return emoji_choose(e)+ " " +"Waiting to hear back"
+    }
+    else if(e === "coding") {
+        return emoji_choose(e)+ " " +"Coding Challenge"
+    }
+    else if(e === "interview") {
+        return emoji_choose(e)+ " " +"Interview"
+    }
+    else if(e === "offer") {
+        return emoji_choose(e)+ " " +"Offer"
+    }
+    else if(e === "rejected") {
+        return emoji_choose(e)+ " " +"Rejected"
+    }
+    else {
+        return emoji_choose(e)+ " " +"Nyet"
+    }
+}
 
 
 function Home() {
@@ -12,6 +56,8 @@ function Home() {
     const [selectedOption, setSelectedOption] = useState('');
 
     const [filterDisplay, setFilterDisplay] = useState([]);
+
+    const [titleDrop, setTitleDrop] = useState('Filter Dropdown')
 
     let jobList = [    
         { company: "google", position: "SWE", status: "waiting"},
@@ -52,6 +98,7 @@ function Home() {
 
     const handleDropdownChange = e => {
         setSelectedOption(e);
+        setTitleDrop(drop_choose(e));
 
         let oldList = cards.map(card => {
             return { company: card.company, position: card.position, status: card.status.toLowerCase() };
@@ -73,7 +120,7 @@ function Home() {
         <div>
             {/* filter dropdown thing here too */}
             <div className="filter">
-                <Dropdown FilterType="Filter Dropdown" value={selectedOption} handleSelect={handleDropdownChange}/>
+                <Dropdown titleDrop={titleDrop}  value={selectedOption} handleSelect={handleDropdownChange}/>
             </div>
             <div className="searchbox">
             <SearchBar value={query} handleChange={e =>handleChange(e.target.value)} />

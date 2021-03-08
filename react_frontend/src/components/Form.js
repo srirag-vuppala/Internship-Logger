@@ -3,9 +3,10 @@ import React, { Component } from 'react'
 class Form extends Component {
     initialState = {
         name: '',
+        bye bi
         job: '',
     }
-    state = this.initialState
+    state = this.initialStateh
     
     handleChange = event => {
         const { name, value } = event.target

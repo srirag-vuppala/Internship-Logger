@@ -32,7 +32,7 @@ const emoji_choose = e => {
     }
 }
 
-const Dropdown_Button = ({FilterType, handleSelect}) => {
+const Dropdown_Button = ({titleDrop, handleSelect}) => {
     return (
         <>
           <style type="text/css">
@@ -60,7 +60,9 @@ const Dropdown_Button = ({FilterType, handleSelect}) => {
           </style>
           <DropdownButton 
             onSelect={handleSelect} 
-            title={FilterType}
+            title={titleDrop}
+            // onClick={handleClick}
+            // title=
             variant="danger"
             bsPrefix="super-colors"
             >

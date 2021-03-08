@@ -2,11 +2,8 @@
 # Internship-Logger
 CSC 307 Project | [Wiki Page](https://github.com/srirag-vuppala/Internship-Logger/wiki)  
 
-CI Web Page:
----
-https://travis-ci.com/github/srirag-vuppala/Internship-Logger
 
-Time Log Link:
+Time Log:
 ---
 https://docs.google.com/spreadsheets/d/1lA9IDxMlvwn2KnbLBLqlZPUooWh7hr3ekhfCKxlAwmg/edit?usp=sharing
 
@@ -17,7 +14,7 @@ https://www.figma.com/file/BtVrbVMiazxniE5FzXodcy/Internship-Log?node-id=19%3A0
 
 Dev Environment Set Up:
 ---
-Tools/Technolgies:
+Tools/Technologies:
 
 - npm: https://nodejs.org/en/download/
 - yarn: npm install --global yarn

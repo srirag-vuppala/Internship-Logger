@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../assets/Spreadsheet.css";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import Popup from "./Popup";
 import Dropdown from "./Dropdown_Button";
 import axios from "axios";
@@ -122,6 +123,32 @@ class Spreadsheet extends React.Component {
   
     return (
       <div style={style}>
+        <style type="text/css">
+          {`
+            .super-colors {
+              background: #DC2F02;
+              transform: scale(0.8);
+              margin-top: 12px;
+              margin-left: 10px;
+              border-radius: 8px;
+              box-shadow: 0 4px 10px rgba(235, 0, 0, .50);  /* x, y, blur */
+              font-family: Montserrat;
+              border-color: #DC2F02;
+            }
+            .super-colors:hover{
+              background-color: rgba(224, 0, 0, .80);
+              border-color:  rgba(224, 0, 0, .80) ;
+            }
+            .super-colors::after{
+              border-color:  rgba(224, 0, 0, .80);
+              background-color:  rgba(224, 0, 0, .80); 
+            }
+            .super-colors:enabled{
+              background-color:  rgba(224, 0, 0, .80);
+              border-color: rgba(224, 0, 0, .80);
+            }
+          `}
+          </style>
 		    <div><SpreadsheetBoard /></div>
         <div>
           <input
@@ -148,9 +175,9 @@ class Spreadsheet extends React.Component {
                   <div className="Additional-Information-box">
                     <input type="text" placeholder="Additional Information"  value={this.state.info} onChange={handleInfoChange}/>
                   </div> 
-                  <button className="Submit-Position" onClick={handleSubmittedChange}>
+                  <Button className="Submit-Position" bsPrefix="super-colors" variant="danger" onClick={handleSubmittedChange}>
                     Submit Position
-                  </button>
+                  </Button>
                 </>
               }
               handleClose={togglePopup}
@@ -456,8 +483,8 @@ class SpreadsheetCard extends React.Component {
               <strong>Info: </strong>
               {this.props.job.additional_info}
               <br />
-              <strong>Delete</strong>
-              <button onClick={handleChange}>Delete</button>
+              {/* <strong>Delete</strong> */}
+              <Button onClick={handleChange} variant="danger">Delete</Button>
               <br />
             </div>
           )}

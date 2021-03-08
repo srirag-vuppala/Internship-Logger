@@ -49,7 +49,7 @@ class Job(Model):
         users = list(self.collection.find({"name": name, "job": job}))
         for user in users:
             user["_id"] = str(user["_id"])
-        return users
+        return user
 
 
     def find_by_company(self, company):

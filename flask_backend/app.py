@@ -78,7 +78,7 @@ def get_job(id):
       return jsonify({"error": "User not found"}), 404 
 
 
-@app.route('/', methods=['GET','DELETE', 'POST'])
+@app.route('/', methods=['GET'])
 # make this the home page
 def homePage():
    if request.method == 'GET':
@@ -88,9 +88,4 @@ def homePage():
       return {"job_list": jobs} 
       #return getJobsFromQuery()
        
-   elif request.method == 'POST':   # WE ONLY NEED THIS IF WE CAN ADD FROM FRONT PAGE EDIT BUTTON
-     return jobToAdd()
-
-   elif request.method == 'DELETE': # WE ONLY NEED THIS IF WE CAN DELETE FROM FRONT PAGE EDIT BUTTON
-      return deleteJob()
    return "sad"

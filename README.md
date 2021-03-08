@@ -13,7 +13,7 @@ https://www.figma.com/file/BtVrbVMiazxniE5FzXodcy/Internship-Log?node-id=19%3A0
 
 Dev Environment Set Up:
 ---
-Tools/Technolgies:
+Tools/Technologies:
 
 - npm: https://nodejs.org/en/download/
 - yarn: npm install --global yarn

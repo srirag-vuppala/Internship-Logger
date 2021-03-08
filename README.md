@@ -8,6 +8,7 @@ https://docs.google.com/spreadsheets/d/1lA9IDxMlvwn2KnbLBLqlZPUooWh7hr3ekhfCKxlA
 
 UI Prototpe:
 ---
+Last Updated: March 1, 2021  
 https://www.figma.com/file/BtVrbVMiazxniE5FzXodcy/Internship-Log?node-id=19%3A0
 
 Dev Environment Set Up:

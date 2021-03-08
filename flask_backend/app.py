@@ -46,11 +46,18 @@ def deleteJob():
 
 
 
-@app.route('/spreadsheet', methods=['POST','DELETE'])
+@app.route('/spreadsheet', methods=['GET','POST','DELETE'])
 # make this the home page
 def spreadsheet():
-   if request.method == 'POST':
-      return jobToAdd()
+   if request.method == 'GET':
+      print("made it into GET")
+      jobs = Job().find_all()
+      print(jobs)
+      return {"job_list": jobs} 
+      #return getJobsFromQuery()
+
+   elif request.method == 'POST':
+      return addJob()
 
    elif request.method == 'DELETE':
       return deleteJob()
@@ -69,7 +76,7 @@ def homePage():
       #return getJobsFromQuery()
        
    elif request.method == 'POST':   # WE ONLY NEED THIS IF WE CAN ADD FROM FRONT PAGE EDIT BUTTON
-     return jobToAdd()
+     return addJob()
 
    elif request.method == 'DELETE': # WE ONLY NEED THIS IF WE CAN DELETE FROM FRONT PAGE EDIT BUTTON
       return deleteJob()

@@ -2,7 +2,7 @@
 # Internship-Logger
 CSC 307 Project | [Wiki Page](https://github.com/srirag-vuppala/Internship-Logger/wiki)  
 
-Time Log Link:
+Time Log:
 ---
 https://docs.google.com/spreadsheets/d/1lA9IDxMlvwn2KnbLBLqlZPUooWh7hr3ekhfCKxlAwmg/edit?usp=sharing
 

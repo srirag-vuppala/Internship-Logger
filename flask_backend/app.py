@@ -2,7 +2,6 @@
 from flask import Flask
 from flask import request
 from flask import jsonify 
-#from flask import redirect, url_for
 from flask_cors import CORS 
 from mongo import Job
 import json
@@ -14,15 +13,6 @@ jobs = {
    'job_list' : [{}]
 }
 
-def getJobsFromQuery():
-   search_status = request.args.get('status')
-   search_name = request.args.get('company')
-   if search_status:
-      jobs = Job().find_by_status(search_status)# just need this
-   elif search_name:
-      jobs = Job().find_by_company(search_name)
-   return {"job_list": jobs}
- 
  
 def addJob(): 
    jobToAdd = request.get_json()
@@ -35,12 +25,9 @@ def addJob():
 
 def deleteJob():
    jobToDelete = request.get_json()
-   resp = jobToDelete.remove()            # DOUBLE CHECK THAT THIS WORKS                  
-   #print(f'resp = {resp}')
-   if resp['n'] == 1:                     # WHAT DOES THIS DO?????
+   resp = jobToDelete.remove()                              
+   if resp['n'] == 1:                     
       return {}, 204
-   #if user.reload() :
-   #   return user
    else :
       return jsonify({"error": "job not found"}), 404
 
@@ -50,16 +37,13 @@ def deleteJob():
 # make this the home page
 def spreadsheet():
    if request.method == 'POST':
-      print("went to theee post")
       return addJob()
 
    elif request.method == 'GET':
-      print("made it into GET 2")
       jobs = Job().find_all()
       return {"job_list": jobs} 
    elif request.method == 'DELETE':
       print(request.get_json())
-      print("made it to delete bich")
       return deleteJob()
    return "sad"
       
@@ -72,25 +56,16 @@ def get_job(id):
       print(f'resp = {resp}')
    if resp['n'] == 1:
       return {}, 204
-   #if user.reload() :
-   # return user
    else :
       return jsonify({"error": "User not found"}), 404 
 
 
-@app.route('/', methods=['GET','DELETE', 'POST'])
+@app.route('/', methods=['GET'])
 # make this the home page
 def homePage():
    if request.method == 'GET':
-      print("made it into GET")
       jobs = Job().find_all()
       print(jobs)
       return {"job_list": jobs} 
-      #return getJobsFromQuery()
        
-   elif request.method == 'POST':   # WE ONLY NEED THIS IF WE CAN ADD FROM FRONT PAGE EDIT BUTTON
-     return jobToAdd()
-
-   elif request.method == 'DELETE': # WE ONLY NEED THIS IF WE CAN DELETE FROM FRONT PAGE EDIT BUTTON
-      return deleteJob()
    return "sad"
